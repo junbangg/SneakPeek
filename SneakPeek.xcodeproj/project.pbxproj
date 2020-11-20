@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3612D65725679B6F003361CE /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612D65625679B6F003361CE /* Responses.swift */; };
 		36675D9C2566836B0098192B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36675D9B2566836B0098192B /* AppDelegate.swift */; };
 		36675D9E2566836B0098192B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36675D9D2566836B0098192B /* SceneDelegate.swift */; };
 		36675DA02566836B0098192B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36675D9F2566836B0098192B /* ContentView.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3612D65625679B6F003361CE /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
 		36675D982566836B0098192B /* SneakPeek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SneakPeek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36675D9B2566836B0098192B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36675D9D2566836B0098192B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3612D65525679B4A003361CE /* SneakPeekAPI */ = {
+			isa = PBXGroup;
+			children = (
+				3612D65625679B6F003361CE /* Responses.swift */,
+			);
+			path = SneakPeekAPI;
+			sourceTree = "<group>";
+		};
 		36675D8F2566836B0098192B = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +66,7 @@
 		36675D9A2566836B0098192B /* SneakPeek */ = {
 			isa = PBXGroup;
 			children = (
+				3612D65525679B4A003361CE /* SneakPeekAPI */,
 				36675D9B2566836B0098192B /* AppDelegate.swift */,
 				36675D9D2566836B0098192B /* SceneDelegate.swift */,
 				36675D9F2566836B0098192B /* ContentView.swift */,
@@ -146,6 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3612D65725679B6F003361CE /* Responses.swift in Sources */,
 				36675D9C2566836B0098192B /* AppDelegate.swift in Sources */,
 				36675D9E2566836B0098192B /* SceneDelegate.swift in Sources */,
 				36675DA02566836B0098192B /* ContentView.swift in Sources */,
