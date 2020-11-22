@@ -54,8 +54,6 @@ class SearchViewModel : ObservableObject {
             })
         
         
-        //            .map(Array.removeDuplicates)
-        
     }
     
 }
