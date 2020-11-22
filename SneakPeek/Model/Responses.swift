@@ -33,7 +33,7 @@
 
 import Foundation
 
-struct ProductResponse : Codable {
+struct ShoeDataResponse : Codable {
     
     let productList : [Shoe]
     
@@ -45,7 +45,7 @@ struct ProductResponse : Codable {
         let brand : String
         let silhoutte : String
         let styleID: String
-        let make : String
+        let make : String//same thing as silhouette
         let colorway : String
         let retailPrice : Int
         let thumbnail : String

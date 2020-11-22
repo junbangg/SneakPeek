@@ -6,8 +6,8 @@
 //  Copyright © 2020 Jun suk Bang. All rights reserved.
 //
 
-
 import Foundation
+
 enum APIError: Error {
     /// Encoding issue when trying to send data.
     case encodingError(String?)

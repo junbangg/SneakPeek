@@ -10,10 +10,10 @@ import Foundation
 import Combine
 
 // MARK: - Protocols
-protocol APIRequests {
+protocol APIRequest {
     //Get Products
-    func getProducts(shoeName : String) -> AnyPublisher<ProductResponse, APIError>
-    func getProductPrices(shoeID : String) -> AnyPublisher<ProductResponse, APIError>
+    func getProducts(shoeName : String) -> AnyPublisher<ShoeDataResponse, APIError>
+    func getProductPrices(shoeID : String) -> AnyPublisher<ShoeDataResponse, APIError>
     
 }
 // MARK: - Main Class
@@ -24,13 +24,13 @@ class APINetworking {
     }
 }
 // MARK: - Fetching Data functions
-extension APINetworking : APIRequests {
+extension APINetworking : APIRequest {
     //MARK: -getProducts
     ///
     /// - Parameters:
     ///     - shoeName: shoe name search : String
     /// - Returns: send(with: prepareForProductSearch())
-    func getProducts(shoeName: String) -> AnyPublisher<ProductResponse, APIError> {
+    func getProducts(shoeName: String) -> AnyPublisher<ShoeDataResponse, APIError> {
         return send(with: prepareForProductSearch(shoeName: shoeName))
     }
     //MARK: -getProductPrices
@@ -38,7 +38,7 @@ extension APINetworking : APIRequests {
     /// - Parameters:
     ///     - shoeID: String
     /// - Returns: send()with: prepareForPriceSearch()
-    func getProductPrices(shoeID: String) -> AnyPublisher<ProductResponse, APIError> {
+    func getProductPrices(shoeID: String) -> AnyPublisher<ShoeDataResponse, APIError> {
         return send(with: prepareForPriceSearch(shoeID: shoeID))
     }
     
@@ -75,7 +75,7 @@ private extension APINetworking {
         let url = URL(string: BaseAPI.baseURL + "search/" + shoeName)!
         var dataRequest = URLRequest(url: url)
         dataRequest.httpMethod = "GET"
-        dataRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+//        dataRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         //        do {
         //            dataRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         //        } catch let error{

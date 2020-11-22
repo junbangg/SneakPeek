@@ -17,6 +17,8 @@
 		36675DA82566836E0098192B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36675DA62566836E0098192B /* LaunchScreen.storyboard */; };
 		368420802569203600C74879 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684207F2569203600C74879 /* Errors.swift */; };
 		368420822569216800C74879 /* Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368420812569216800C74879 /* Parsing.swift */; };
+		36842086256A273900C74879 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36842085256A273900C74879 /* SearchViewModel.swift */; };
+		36842088256A2C4C00C74879 /* ShoeRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36842087256A2C4C00C74879 /* ShoeRowViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		36675DA92566836E0098192B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3684207F2569203600C74879 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		368420812569216800C74879 /* Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parsing.swift; sourceTree = "<group>"; };
+		36842085256A273900C74879 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		36842087256A2C4C00C74879 /* ShoeRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeRowViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				368420832569218900C74879 /* Utility */,
+				36842084256A272700C74879 /* ViewModel */,
 				3612D65525679B4A003361CE /* Model */,
 				36675D9B2566836B0098192B /* AppDelegate.swift */,
 				36675D9D2566836B0098192B /* SceneDelegate.swift */,
@@ -101,6 +106,15 @@
 				368420812569216800C74879 /* Parsing.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		36842084256A272700C74879 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				36842085256A273900C74879 /* SearchViewModel.swift */,
+				36842087256A2C4C00C74879 /* ShoeRowViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,8 +188,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36842088256A2C4C00C74879 /* ShoeRowViewModel.swift in Sources */,
 				368420822569216800C74879 /* Parsing.swift in Sources */,
 				3612D65725679B6F003361CE /* Responses.swift in Sources */,
+				36842086256A273900C74879 /* SearchViewModel.swift in Sources */,
 				3612D6592567A23F003361CE /* APINetworking.swift in Sources */,
 				36675D9C2566836B0098192B /* AppDelegate.swift in Sources */,
 				36675D9E2566836B0098192B /* SceneDelegate.swift in Sources */,
