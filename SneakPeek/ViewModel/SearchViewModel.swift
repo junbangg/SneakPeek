@@ -11,7 +11,7 @@ import Combine
 
 class SearchViewModel : ObservableObject {
     @Published var shoe : String = ""
-    @Published var datasource : [ShoeRowViewModel] = []
+    @Published var datasource : [SearchResultViewModel] = []
     private let shoeFetcher : APIRequest
     private var disposables = Set<AnyCancellable>()
     init(
@@ -34,7 +34,7 @@ class SearchViewModel : ObservableObject {
     func fetchShoe(forShoe shoe : String) {
         shoeFetcher.getProducts(shoeName: shoe)
             .map{response in
-                response.productList.map(ShoeRowViewModel.init)}
+                response.productList.map(SearchResultViewModel.init)}
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] value in
@@ -52,6 +52,7 @@ class SearchViewModel : ObservableObject {
                     //7
                     self.datasource = shoe
             })
+            .store(in: &disposables)
         
         
     }

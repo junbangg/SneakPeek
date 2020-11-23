@@ -10,11 +10,12 @@ import Foundation
 import SwiftUI
 import Combine
 
-struct ShoeRowViewModel : Identifiable {
+struct SearchResultViewModel : Identifiable {
+    private let shoe : ShoeDataResponse.Shoe
+    
     var id: String {
         return styleID
     }
-    private let shoe : ShoeDataResponse.Shoe
     
     var shoeName: String {
         return shoe.shoeName
