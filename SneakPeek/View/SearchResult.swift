@@ -16,11 +16,20 @@ struct SearchResult: View {
     }
     var body: some View {
         HStack {
+            //Thumbnail
+            Thumbnail(url: viewModel.thumbnail)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 80)
+                .padding(.trailing)
             Text("\(viewModel.shoeName)")
-            Spacer()
-            Text("\(viewModel.brand)")
-            Spacer()
-            Text("\(viewModel.retailPrice)")
+                .font(.footnote)
+//            Spacer()
+//            Text("Check Price!")
+//                .font(.body)
+//                .fontWeight(.light)
+//                .foregroundColor(MyColors.ferrariRed)
+//            Text("\(viewModel.retailPrice)")
         }
+    .padding()
     }
 }

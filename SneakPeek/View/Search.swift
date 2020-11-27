@@ -44,7 +44,7 @@ struct Search: View {
 
 private extension Search {
     var searchField : some View {
-        TextField("Jordan 1 Chicago", text: $viewModel.shoe)
+        TextField("Jordan", text: $viewModel.shoe)
             .padding()
             .background(MyColors.lightGreyColor)
             .cornerRadius(5.0)

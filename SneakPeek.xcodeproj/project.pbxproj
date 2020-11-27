@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3612D65725679B6F003361CE /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612D65625679B6F003361CE /* Responses.swift */; };
 		3612D6592567A23F003361CE /* APINetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612D6582567A23F003361CE /* APINetworking.swift */; };
+		3618F4BF2571571E00E178EC /* Thumbnaill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3618F4BE2571571E00E178EC /* Thumbnaill.swift */; };
 		36583B5C256B96F70094C8AE /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36583B5B256B96F70094C8AE /* SearchResult.swift */; };
 		36675D9C2566836B0098192B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36675D9B2566836B0098192B /* AppDelegate.swift */; };
 		36675D9E2566836B0098192B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36675D9D2566836B0098192B /* SceneDelegate.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		3612D65625679B6F003361CE /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
 		3612D6582567A23F003361CE /* APINetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APINetworking.swift; sourceTree = "<group>"; };
+		3618F4BE2571571E00E178EC /* Thumbnaill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnaill.swift; sourceTree = "<group>"; };
 		36583B5B256B96F70094C8AE /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		36675D982566836B0098192B /* SneakPeek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SneakPeek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36675D9B2566836B0098192B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				3684208A256A37C500C74879 /* Search.swift */,
 				36583B5B256B96F70094C8AE /* SearchResult.swift */,
+				3618F4BE2571571E00E178EC /* Thumbnaill.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				36842086256A273900C74879 /* SearchViewModel.swift in Sources */,
 				3612D6592567A23F003361CE /* APINetworking.swift in Sources */,
 				3684208D256A399600C74879 /* MyColors.swift in Sources */,
+				3618F4BF2571571E00E178EC /* Thumbnaill.swift in Sources */,
 				36675D9C2566836B0098192B /* AppDelegate.swift in Sources */,
 				36675D9E2566836B0098192B /* SceneDelegate.swift in Sources */,
 				3684208B256A37C500C74879 /* Search.swift in Sources */,
