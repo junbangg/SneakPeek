@@ -33,8 +33,8 @@ class SearchViewModel : ObservableObject {
     
     func fetchShoe(forShoe shoe : String) {
         shoeFetcher.getProducts(shoeName: shoe)
-//            .map{response in
-//                response.map(SearchResultViewModel.init)}
+            .map{response in
+                response.map(SearchResultViewModel.init)}
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] value in
@@ -51,7 +51,7 @@ class SearchViewModel : ObservableObject {
                 receiveValue: { [weak self] shoe in
                     guard let self = self else { return }
                     //7
-//                    self.datasource = shoe
+                    self.datasource = shoe
                     print(shoe)
             })
             .store(in: &disposables)

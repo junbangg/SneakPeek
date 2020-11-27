@@ -31,7 +31,7 @@ struct SearchResultViewModel : Identifiable {
         return shoe.thumbnail
     }
     var retailPrice : Int {
-        return shoe.retailPrice!
+        return shoe.retailPrice ?? 0
     }
     init(shoe: ShoeDataResponse) {
         self.shoe = shoe

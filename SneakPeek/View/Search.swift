@@ -18,17 +18,21 @@ struct Search: View {
     var body: some View {
         
         NavigationView {
-            List {
+            VStack {
+                Spacer()
                 searchField
-//                results
-                //                if viewModel.dataSource.isEmpty {
-                //                    emptySection
-                //                } else {
-                //                    results
-                //                }
+                if viewModel.datasource.isEmpty {
+                    emptySection
+                } else {
+                    List {
+                        results
+                    }
+                    .listStyle(GroupedListStyle())
+                }
+                Spacer()
             }
-            .listStyle(GroupedListStyle())
             .navigationBarTitle("SneakPeek")
+            
         }
         
         
@@ -50,14 +54,14 @@ private extension Search {
         //            .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
     }
     
-//    var results : some View {
-//        Section {
-//            ForEach(viewModel.datasource, content: SearchResult.init(viewModel:))
-//        }
-//    }
+    var results : some View {
+        Section {
+            ForEach(viewModel.datasource, content: SearchResult.init(viewModel:))
+        }
+    }
     var emptySection: some View {
         Section {
-            Text("No results")
+            Text("Search for a shoe!")
                 .foregroundColor(.gray)
         }
         
