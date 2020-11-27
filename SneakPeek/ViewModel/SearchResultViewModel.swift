@@ -11,7 +11,7 @@ import SwiftUI
 import Combine
 
 struct SearchResultViewModel : Identifiable {
-    private let shoe : ShoeDataResponse.Shoe
+    private let shoe : ShoeDataResponse
     
     var id: String {
         return styleID
@@ -31,9 +31,9 @@ struct SearchResultViewModel : Identifiable {
         return shoe.thumbnail
     }
     var retailPrice : Int {
-        return shoe.retailPrice
+        return shoe.retailPrice!
     }
-    init(shoe: ShoeDataResponse.Shoe) {
+    init(shoe: ShoeDataResponse) {
         self.shoe = shoe
     }
     

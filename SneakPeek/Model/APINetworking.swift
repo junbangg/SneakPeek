@@ -114,8 +114,8 @@ import Combine
 // MARK: - Protocols
 protocol APIRequest {
     //Get Products
-    func getProducts(shoeName : String) -> AnyPublisher<ShoeDataResponse, APIError>
-    func getProductPrices(shoeID : String) -> AnyPublisher<ShoeDataResponse, APIError>
+    func getProducts(shoeName : String) -> AnyPublisher<[ShoeDataResponse], Error>
+//    func getProductPrices(shoeID : String) -> AnyPublisher<ShoeDataResponse, APIError>
     
 }
 // MARK: - Main Class
@@ -132,7 +132,7 @@ extension APINetworking : APIRequest {
     /// - Parameters:
     ///     - shoeName: shoe name search : String
     /// - Returns: send(with: prepareForProductSearch())
-    func getProducts(shoeName: String) -> AnyPublisher<ShoeDataResponse, APIError> {
+    func getProducts(shoeName: String) -> AnyPublisher<[ShoeDataResponse], Error> {
         return send(with: prepareForProductSearch(shoeName: shoeName))
     }
     //MARK: -getProductPrices
@@ -140,23 +140,25 @@ extension APINetworking : APIRequest {
     /// - Parameters:
     ///     - shoeID: String
     /// - Returns: send()with: prepareForPriceSearch()
-    func getProductPrices(shoeID: String) -> AnyPublisher<ShoeDataResponse, APIError> {
-        return send(with: prepareForPriceSearch(shoeID: shoeID))
-    }
+//    func getProductPrices(shoeID: String) -> AnyPublisher<ShoeDataResponse, APIError> {
+//        return send(with: prepareForPriceSearch(shoeID: shoeID))
+//    }
     
     //MARK: -function to send request to backend
     ///
     /// - Parameters:
     ///     - request: receives URLRequest prepared by  functions in extension
-    private func send<T> (with request : URLRequest) -> AnyPublisher<T, APIError> where T : Decodable{
+    private func send<T> (with request : URLRequest) -> AnyPublisher<[T], Error> where T : Decodable{
         
         return session.dataTaskPublisher(for: request)
-            .mapError { error in
-                .badRequest(error.localizedDescription)
-        }
-        .flatMap(maxPublishers: .max(1)) { pair in
-            decode(pair.data)
-        }
+//            .mapError { error in
+//                .badRequest(error.localizedDescription)
+//        }
+        .map{$0.data}
+        .decode(type: [T].self, decoder: JSONDecoder())
+//        .flatMap(maxPublishers: .max(1)) { response in
+//            decode(response.data)
+//        }
         .eraseToAnyPublisher()
         
     }

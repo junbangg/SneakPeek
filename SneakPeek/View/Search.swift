@@ -20,7 +20,7 @@ struct Search: View {
         NavigationView {
             List {
                 searchField
-                results
+//                results
                 //                if viewModel.dataSource.isEmpty {
                 //                    emptySection
                 //                } else {
@@ -50,11 +50,11 @@ private extension Search {
         //            .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
     }
     
-    var results : some View {
-        Section {
-            ForEach(viewModel.datasource, content: SearchResult.init(viewModel:))
-        }
-    }
+//    var results : some View {
+//        Section {
+//            ForEach(viewModel.datasource, content: SearchResult.init(viewModel:))
+//        }
+//    }
     var emptySection: some View {
         Section {
             Text("No results")

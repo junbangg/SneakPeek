@@ -8,10 +8,9 @@
 import Foundation
 import Combine
 
-func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, APIError> {
-  let decoder = JSONDecoder()
+func decode<T: Decodable>(_ data: Data) -> AnyPublisher<[T], APIError> {
   return Just(data)
-    .decode(type: T.self, decoder: decoder)
+    .decode(type: [T].self, decoder: JSONDecoder())
     .mapError { error in
       .parseError(error.localizedDescription)
     }
