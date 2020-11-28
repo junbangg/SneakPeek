@@ -7,14 +7,15 @@
 //
 
 import SwiftUI
+import SwiftKeychainWrapper
 
 struct Search: View {
     @ObservedObject var viewModel : SearchViewModel
-    @ObservedObject var productViewModel : ProductViewModel
+//    @ObservedObject var productViewModel : ProductViewModel
     
-    init(viewModel : SearchViewModel, productViewModel : ProductViewModel) {
+    init(viewModel : SearchViewModel) {
         self.viewModel = viewModel
-        self.productViewModel = productViewModel
+//        self.productViewModel = productViewModel
     }
     @State private var inputSwitch : Bool = false
     @State private var shoeID : String = ""
@@ -91,15 +92,14 @@ private extension Search {
         Section {
             ForEach(viewModel.datasource) { result in
                 NavigationButton(action: {
-                    self.shoeID = result.id
+                    let _ : Bool = KeychainWrapper.standard.set(result.id, forKey: "shoeID")
+//                    self.shoeID = result.id
                 }, destination: {
-                    Product(viewmodel: self.productViewModel)
+//                    Product(viewmodel: self.productViewModel)
+                    self.viewModel.ProductDetails
                 }) {
                     SearchResult.init(viewModel: result, shoeID: result.id)
                 }
-//                NavigationLink(destination: TestView()) {
-//                    SearchResult.init(viewModel: result, shoeID: result.id)
-//                }
                 
             }
         }

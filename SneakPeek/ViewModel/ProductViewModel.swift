@@ -11,13 +11,14 @@ import Combine
 
 class ProductViewModel : ObservableObject {
     @Published var datasource : ProductDetailsViewModel?
-    @Published var shoeID : String = ""
-//    private let id : String
+//    @Published var shoeID : String = ""
+    private let shoeID : String
     private let shoeFetcher : APIRequest
     private var disposables = Set<AnyCancellable>()
     
-    init(shoeFetcher: APIRequest) {
+    init(shoeID: String, shoeFetcher: APIRequest) {
 //        self.id = id
+        self.shoeID = shoeID
         self.shoeFetcher = shoeFetcher
     }
     

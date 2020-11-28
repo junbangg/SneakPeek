@@ -1,0 +1,6 @@
+framework module Pods_SneakPeek {
+  umbrella header "Pods-SneakPeek-umbrella.h"
+
+  export *
+  module * { export * }
+}

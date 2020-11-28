@@ -11,11 +11,9 @@ import SwiftUI
 
 enum ProductViewBuilder {
     static func makeProductDetailView(
-        shoeFetcher : APIRequest,
-        shoeID: String
+        shoeFetcher : APIRequest
     ) -> some View {
-        let viewmodel = ProductViewModel(shoeFetcher: shoeFetcher)
+        let viewmodel = SearchViewModel(shoeFetcher: shoeFetcher)
         return Product(viewmodel: viewmodel)
-
     }
 }

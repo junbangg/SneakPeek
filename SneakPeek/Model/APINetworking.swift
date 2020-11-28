@@ -14,7 +14,7 @@ import Combine
 protocol APIRequest {
     //Get Products
     func getProducts(shoeName : String) -> AnyPublisher<[ShoeDataResponse], Error>
-    func getProductPrices(shoeID : String) -> AnyPublisher<PriceDataResponse, Error>
+    func getProductPrices(shoeID : String) -> AnyPublisher<PriceDataResponse, APIError>
     
 }
 // MARK: - Main Class
@@ -39,7 +39,7 @@ extension APINetworking : APIRequest {
     /// - Parameters:
     ///     - shoeID: String
     /// - Returns: send()with: prepareForPriceSearch()
-    func getProductPrices(shoeID: String) -> AnyPublisher<PriceDataResponse, Error> {
+    func getProductPrices(shoeID: String) -> AnyPublisher<PriceDataResponse, APIError> {
         return sendPriceRequest(with: prepareForPriceSearch(shoeID: shoeID))
     }
     
@@ -67,11 +67,19 @@ extension APINetworking : APIRequest {
     /// - Parameters:
     ///     - request: receives URLRequest prepared by  functions in extension
     /// - Returns:  JSON Object
-    private func sendPriceRequest<T> (with request : URLRequest) -> AnyPublisher<T, Error> where T : Decodable {
+    private func sendPriceRequest<T> (with request : URLRequest) -> AnyPublisher<T, APIError> where T : Decodable {
         return session.dataTaskPublisher(for: request)
-            .map{$0.data}
-            .decode(type: T.self, decoder: JSONDecoder())
+            .mapError { error in
+                .badRequest(error.localizedDescription)
+        }//4
+            .flatMap(maxPublishers: .max(1)) { pair in
+                decode(pair.data)
+        }
+            //5
             .eraseToAnyPublisher()
+        //        .map{$0.data}
+        //        .decode(type: T.self, decoder: JSONDecoder())
+        //        .eraseToAnyPublisher()
     }
 }
 // MARK: -URL components
@@ -124,7 +132,7 @@ private extension APINetworking {
     
     //GET localhost:3000/id/:styleID/prices
     func prepareForPriceSearch(shoeID: String) -> URLRequest {
-        let url = URL(string: BaseAPI.baseURL + "id/" + shoeID + "prices")!
+        let url = URL(string: BaseAPI.baseURL + "id/" + shoeID + "/prices")!
         var dataRequest = URLRequest(url: url)
         dataRequest.httpMethod = "GET"
         

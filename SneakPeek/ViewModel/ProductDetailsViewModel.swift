@@ -9,7 +9,8 @@
 import Foundation
 import Combine
 
-struct ProductDetailsViewModel {
+struct ProductDetailsViewModel{
+    
     private let details : PriceDataResponse
     
     var shoeName : String {
