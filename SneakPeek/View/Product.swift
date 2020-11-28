@@ -22,9 +22,9 @@ struct Product: View {
             if viewmodel.productDatasource == nil {
                 Text("Loading...")
             }else {
-//                Thumbnail(url: viewmodel.productDatasource!.thumbnail)
-//                    .aspectRatio(contentMode: .fit)
-//                    .frame(width: 300)
+                Thumbnail(url: viewmodel.productDatasource!.thumbnail)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 300)
                 productDetails
             }
             
@@ -42,20 +42,27 @@ private extension Product {
                     .foregroundColor(.gray)
                 Text(viewmodel.productDatasource!.shoeName)
             }
+            .padding(.bottom, 20)
             HStack {
                 HStack {
                     Text("발매일")
                         .foregroundColor(.gray)
                     Text(viewmodel.productDatasource!.releaseDate)
                 }
+                .padding(.horizontal, 10)
+                Spacer()
                 HStack {
                     Text("정가")
                         .foregroundColor(.gray)
                     Text("\(viewmodel.productDatasource!.retailPrice)")
                 }
+                .padding(.horizontal, 10)
                 
             }
-            Text(viewmodel.datasource.description)
+            .padding(.bottom, 20)
+            Text(viewmodel.productDatasource!.description)
+                .font(.caption)
+                .padding(.horizontal, 10)
         }
         
     }

@@ -76,6 +76,7 @@ class SearchViewModel : ObservableObject {
                 switch value {
                 case .failure:
                     print(value)
+                    self.refresh()
                     self.productDatasource = nil
                 case .finished:
                     break

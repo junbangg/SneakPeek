@@ -20,7 +20,7 @@ struct ProductDetailsViewModel{
         return details.brand
     }
     var description : String {
-        return details.responseDescription
+        return details.description
     }
     var retailPrice : Int {
         return details.retailPrice

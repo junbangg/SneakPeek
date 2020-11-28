@@ -37,14 +37,13 @@ struct PriceDataResponse: Codable {
     let styleID, make, colorway: String
     let retailPrice: Int
     let thumbnail: String
-    let releaseDate, responseDescription, urlKey: String
+    let releaseDate, description, urlKey: String
     let resellLinks: ResellLinks
 
     enum CodingKeys: String, CodingKey {
         case lowestResellPrice, resellPrices, imageLinks
         case id = "_id"
-        case shoeName, brand, silhoutte, styleID, make, colorway, retailPrice, thumbnail, releaseDate
-        case responseDescription = "description"
+        case shoeName, brand, silhoutte, styleID, make, colorway, retailPrice, thumbnail, releaseDate, description
         case urlKey, resellLinks
     }
 }
