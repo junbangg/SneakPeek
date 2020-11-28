@@ -10,26 +10,22 @@ import SwiftUI
 
 struct SearchResult: View {
     private let viewModel : SearchResultViewModel
-    
-    init(viewModel: SearchResultViewModel) {
+    private let shoeID : String
+    init(viewModel: SearchResultViewModel, shoeID : String) {
         self.viewModel = viewModel
+        self.shoeID = viewModel.styleID
     }
     var body: some View {
-        HStack {
-            //Thumbnail
-            Thumbnail(url: viewModel.thumbnail)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 80)
-                .padding(.trailing)
-            Text("\(viewModel.shoeName)")
-                .font(.footnote)
-//            Spacer()
-//            Text("Check Price!")
-//                .font(.body)
-//                .fontWeight(.light)
-//                .foregroundColor(MyColors.ferrariRed)
-//            Text("\(viewModel.retailPrice)")
-        }
-    .padding()
+            HStack {
+                //Thumbnail
+                Thumbnail(url: viewModel.thumbnail)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 80)
+                    .padding(.trailing)
+                Text("\(viewModel.shoeName)")
+                    .font(.footnote)
+            }
+            
+        .padding()
     }
 }

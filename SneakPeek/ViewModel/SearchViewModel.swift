@@ -11,14 +11,18 @@ import Combine
 
 class SearchViewModel : ObservableObject {
     @Published var shoe : String = ""
+    @Published var shoeID : String = ""
     @State var inputSwitch : Bool = false
     @Published var datasource : [SearchResultViewModel] = []
+//    private let shoeID : String
     private let shoeFetcher : APIRequest
     private var disposables = Set<AnyCancellable>()
     init(
+//        shoeID : String,
         shoeFetcher : APIRequest,
         scheduler: DispatchQueue = DispatchQueue(label: "SearchViewModel")
     ) {
+//        self.shoeID = shoeID
         self.shoeFetcher = shoeFetcher
         //2
         $shoe
@@ -60,4 +64,11 @@ class SearchViewModel : ObservableObject {
         
     }
     
+    
+}
+
+extension SearchViewModel {
+    var ProductDetails: some View {
+        return ProductViewBuilder.makeProductDetailView(shoeFetcher: shoeFetcher, shoeID: shoeID)
+    }
 }

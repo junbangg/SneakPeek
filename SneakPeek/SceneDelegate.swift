@@ -29,7 +29,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          */
         let fetcher = APINetworking()
         let viewModel = SearchViewModel(shoeFetcher: fetcher)
-        let contentView = Search(viewModel: viewModel)
+        let productViewModel = ProductViewModel(shoeFetcher: fetcher)
+        let contentView = Search(viewModel: viewModel, productViewModel: productViewModel)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

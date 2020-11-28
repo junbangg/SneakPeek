@@ -10,11 +10,14 @@ import SwiftUI
 
 struct Search: View {
     @ObservedObject var viewModel : SearchViewModel
+    @ObservedObject var productViewModel : ProductViewModel
     
-    init(viewModel : SearchViewModel) {
+    init(viewModel : SearchViewModel, productViewModel : ProductViewModel) {
         self.viewModel = viewModel
+        self.productViewModel = productViewModel
     }
     @State private var inputSwitch : Bool = false
+    @State private var shoeID : String = ""
     
     var body: some View {
         
@@ -82,10 +85,23 @@ private extension Search {
             .padding(.bottom, 20)
             .padding()
     }
-    
+    //SearchResult.init(viewModel:)
+    // Product(viewmodel: self.productViewModel)
     var results : some View {
         Section {
-            ForEach(viewModel.datasource, content: SearchResult.init(viewModel:))
+            ForEach(viewModel.datasource) { result in
+                NavigationButton(action: {
+                    self.shoeID = result.id
+                }, destination: {
+                    Product(viewmodel: self.productViewModel)
+                }) {
+                    SearchResult.init(viewModel: result, shoeID: result.id)
+                }
+//                NavigationLink(destination: TestView()) {
+//                    SearchResult.init(viewModel: result, shoeID: result.id)
+//                }
+                
+            }
         }
     }
     var searchEmpty : some View {
