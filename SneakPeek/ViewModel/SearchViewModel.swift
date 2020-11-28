@@ -11,6 +11,7 @@ import Combine
 
 class SearchViewModel : ObservableObject {
     @Published var shoe : String = ""
+    @State var inputSwitch : Bool = false
     @Published var datasource : [SearchResultViewModel] = []
     private let shoeFetcher : APIRequest
     private var disposables = Set<AnyCancellable>()

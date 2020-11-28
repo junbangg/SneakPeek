@@ -14,44 +14,73 @@ struct Search: View {
     init(viewModel : SearchViewModel) {
         self.viewModel = viewModel
     }
+    @State private var inputSwitch : Bool = false
     
     var body: some View {
         
         NavigationView {
-            VStack {
-                Spacer()
-                searchField
-                if viewModel.datasource.isEmpty {
-                    emptySection
-                } else {
-                    List {
-                        results
+            ZStack {
+                VStack {
+                    if self.inputSwitch == false {
+                        logo
+                            .padding(.top, 50)
+                            .padding(.horizontal, 50)
+                        searchButton
+                        searchEmpty
+                    } else {
+                        searchField
+                        List {
+                            if viewModel.datasource.isEmpty {
+                                emptySection
+                            }
+                            results
+                        }
+                        .listStyle(GroupedListStyle())
                     }
-                    .listStyle(GroupedListStyle())
+                    Spacer()
                 }
-                Spacer()
+                .navigationBarTitle("SneakPeek")
+                .navigationBarHidden(true)
             }
-            .navigationBarTitle("SneakPeek")
+            //            .background(MyColors.cactusJack)
             
         }
-        
-        
-        
-        
         
     }
 }
 
 private extension Search {
+    var logo : some View {
+        Image("Chicago")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 300)
+            .padding(.top,30)
+    }
+    var searchButton : some View {
+        Button(action: {
+            self.inputSwitch = true
+        }) {
+            HStack {
+                
+                Text("Jordan Chicago")
+                Spacer()
+                Spacer()
+            }            .padding()
+                .foregroundColor(.gray)
+                .background(MyColors.lightGreyColor)
+                .cornerRadius(5.0)
+                .padding(.bottom, 20)
+                .padding(40)
+        }.buttonStyle(PlainButtonStyle())
+    }
     var searchField : some View {
-        TextField("Jordan", text: $viewModel.shoe)
+        TextField("Jordan Chicago", text: $viewModel.shoe)
             .padding()
             .background(MyColors.lightGreyColor)
             .cornerRadius(5.0)
             .padding(.bottom, 20)
             .padding()
-        //            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
-        //            .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
     }
     
     var results : some View {
@@ -59,17 +88,18 @@ private extension Search {
             ForEach(viewModel.datasource, content: SearchResult.init(viewModel:))
         }
     }
+    var searchEmpty : some View {
+        Section {
+            Text("Search prices for your favorite shoe!")
+                .foregroundColor(.gray)
+        }
+    }
     var emptySection: some View {
         Section {
-            Text("Search for a shoe!")
+            Text("No Results")
                 .foregroundColor(.gray)
         }
         
     }
     
-    //struct Search_Previews: PreviewProvider {
-    //    static var previews: some View {
-    //        Search()
-    //    }
-    //}
 }

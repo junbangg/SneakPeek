@@ -25,4 +25,5 @@ struct MyColors {
     static let lamboOrange = Color(red:255/255, green: 97/255, blue: 0/255)
     static let tigerOrange = Color(red:253/255, green: 106/255, blue: 2/255)
     static let fireBlue = Color(red:0/255, green: 0/255, blue: 255/255)
+    static let cactusJack = Color(red: 117/255, green: 85/255, blue: 64/255)
 }
