@@ -21,30 +21,30 @@ struct Product: View {
 //    @State private var size: Double = 0
     
     var body: some View {
-        VStack {
-            
-            if viewmodel.productDatasource == nil {
-                Text("Loading...")
-            }else {
-                Thumbnail(url: viewmodel.productDatasource!.thumbnail)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 300)
-                productDetails
-                HStack {
-                    Stepper("Size", onIncrement: {
-                        self.size += 0.5
-                    }, onDecrement: {
-                        self.size -= 0.5
-                    })
+        ScrollView{
+            VStack {
+                if viewmodel.productDatasource == nil {
+                    Text("Loading...")
+                }else {
+                    Thumbnail(url: viewmodel.productDatasource!.thumbnail)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 300)
+                    productDetails
+                    HStack {
+                        Stepper("Size", onIncrement: {
+                            self.size += 0.5
+                        }, onDecrement: {
+                            self.size -= 0.5
+                        })
 
-                    Text(String(format: "%.1f", self.size))
+                        Text(String(format: "%.1f", self.size))
+                    }
+                    .padding(.horizontal, 10)
+//                    Text()
+                    
                 }
-                .padding(.horizontal, 10)
-
-                
                 
             }
-            
         }
         .onAppear(perform: viewmodel.refresh)
         
