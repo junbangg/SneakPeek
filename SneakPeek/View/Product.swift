@@ -18,35 +18,32 @@ struct Product: View {
     
     let sizes : [String] = ["4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5" ,"16", "16.5", "17", "17.5", "18"]
     @State private var size: Float = 4.0
-//    @State private var size: Double = 0
+    //    @State private var size: Double = 0
     
     var body: some View {
-        ScrollView{
-            VStack {
-                if viewmodel.productDatasource == nil {
-                    Text("Loading...")
-                }else {
-                    Thumbnail(url: viewmodel.productDatasource!.thumbnail)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 300)
-                    productDetails
-                    HStack {
-                        Stepper("Size", onIncrement: {
-                            self.size += 0.5
-                        }, onDecrement: {
-                            self.size -= 0.5
-                        })
-
-                        Text(String(format: "%.1f", self.size))
+        GeometryReader{ geometry in
+            ScrollView{
+                VStack {
+                    if self.viewmodel.productDatasource == nil {
+                        Text("Loading...")
+                    }else {
+                        Thumbnail(url: self.viewmodel.productDatasource!.thumbnail)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 300)
+                        self.productDetails
+                        self.chooseSize
+                            .padding(.horizontal, 10)
+                        self.links
                     }
-                    .padding(.horizontal, 10)
-//                    Text()
                     
                 }
-                
+                .frame(width: geometry.size.width)
             }
+                
+            .onAppear(perform: self.viewmodel.refresh)
+            
         }
-        .onAppear(perform: viewmodel.refresh)
+        
         
     }
 }
@@ -77,13 +74,72 @@ private extension Product {
                 
             }
             .padding(.bottom, 20)
-            Text(viewmodel.productDatasource!.description)
-                .font(.caption)
-                .padding(.horizontal, 10)
+            ScrollView {
+                VStack {
+                    Text(viewmodel.productDatasource!.description)
+                        .font(.caption)
+                        .padding(.horizontal, 10)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                }
+            }
+            //            Text(viewmodel.productDatasource!.description)
+            //                .font(.caption)
+            //                .padding(.horizontal, 10)
         }
         
     }
+    var chooseSize : some View {
+        HStack {
+            Stepper("사이즈", onIncrement: {
+                self.size += 0.5
+            }, onDecrement: {
+                self.size -= 0.5
+            })
+            
+            //                            Text(String(format: "%.1f", self.size))
+        }
+    }
+    var links : some View {
+        VStack {
+            HStack{
+                VStack {
+                    Text("Goat")
+                    Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[0]))
+                }.padding()
+                Spacer()
+                VStack {
+                    Text("Flight Club")
+                    Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[1]))
+                }.padding()
+            }
+            //            Spacer()
+            Text(String(format: "%.1f", self.size))
+                .padding()
+            HStack {
+                VStack {
+                    Text("StockX")
+                    Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[2]))
+                }.padding()
+                Spacer()
+                VStack {
+                    Text("Stadium Goods")
+                    Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[3]))
+                }.padding()
+            }
+        }
+    }
+    
+    
 }
+
+//struct Link : View {
+//    let ind : Int
+//    var body: some View {
+//        Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[ind]))
+//    }
+//}
 
 //struct Product_Previews: PreviewProvider {
 //    static var previews: some View {

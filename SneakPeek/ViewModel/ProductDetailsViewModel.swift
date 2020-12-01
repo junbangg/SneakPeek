@@ -32,13 +32,22 @@ struct ProductDetailsViewModel{
     var thumbnail : String {
         return details.thumbnail
     }
-    func getSize(size : String) -> [Double]{
-        let goat : Double = details.resellPrices.goat[size] ?? 0
-        let flightClub : Double = details.resellPrices.flightClub[size] ?? 0
-        let stockX : Double = details.resellPrices.stockX[size] ?? 0
-        let stadiumGoods : Double = details.resellPrices.stadiumGoods[size] ?? 0
+    func getSize(size : Float) -> [Double]{
+        let convertedSize : String
+        if size.rounded(.up) == size.rounded(.down) {
+            //number is int
+            convertedSize = String(String(format: "%.1f", size).dropLast(2))
+        }else {
+            convertedSize = String(format: "%.1f", size)
+        }
+        let goat : Double = details.resellPrices.goat[convertedSize] ?? 0
+        let flightClub : Double = details.resellPrices.flightClub[convertedSize] ?? 0
+        let stockX : Double = details.resellPrices.stockX[convertedSize] ?? 0
+        let stadiumGoods : Double = details.resellPrices.stadiumGoods[convertedSize] ?? 0
         
         let sizeList : [Double] = [goat, flightClub, stockX, stadiumGoods]
+        
+//        let sizeList : [String: Double] = ["Goat": goat, "Flight Club": flightClub, "StockX": stockX, "Stadium Goods": stadiumGoods]
         
         return sizeList
     }
