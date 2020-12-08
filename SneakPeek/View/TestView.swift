@@ -11,10 +11,6 @@ import Combine
 import SwiftKeychainWrapper
 
 struct TestView: View {
-    //    @ObservedObject var viewmodel : SearchViewModel
-    //    init(viewmodel: SearchViewModel) {
-    //        self.viewmodel = viewmodel
-    //    }
     
     var colors = ["Red", "Green", "Blue", "Tartan"]
     @State private var selectedColor = 0
@@ -33,12 +29,6 @@ struct TestView: View {
     
 }
 
-
-//struct Product_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Product()
-//    }
-//}
 
 struct TestView_Previews: PreviewProvider {
     static var previews: some View {

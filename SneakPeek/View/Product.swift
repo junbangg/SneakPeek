@@ -84,9 +84,7 @@ private extension Product {
                     
                 }
             }
-            //            Text(viewmodel.productDatasource!.description)
-            //                .font(.caption)
-            //                .padding(.horizontal, 10)
+           
         }
         
     }
