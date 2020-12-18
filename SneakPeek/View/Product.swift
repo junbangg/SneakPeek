@@ -25,7 +25,9 @@ struct Product: View {
             ScrollView{
                 VStack {
                     if self.viewmodel.productDatasource == nil {
-                        Text("Loading...")
+//                        Text("Loading...")
+//                        Spinner(isAnimating: true, style: .large, color: .gray)
+                        Loader()
                     }else {
                         Thumbnail(url: self.viewmodel.productDatasource!.thumbnail)
                             .aspectRatio(contentMode: .fit)
@@ -39,7 +41,6 @@ struct Product: View {
                                 .padding(.trailing)
                         }
                         .padding(.trailing,20)
-                        .padding(.bottom, 20)
                         HStack {
                             Text("Size:")
                                 .foregroundColor(.gray)
