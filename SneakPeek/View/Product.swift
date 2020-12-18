@@ -31,8 +31,14 @@ struct Product: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 300)
                         self.productDetails
-                        //                        self.chooseSize
-                        //                            .padding(.horizontal, 10)
+                        HStack {
+                            Text("Size:")
+                                .foregroundColor(.gray)
+                            Text(String(format: "%.1f", self.size))
+                                .font(.title)
+                            self.chooseSize
+                        }
+                        .padding()
                         self.links
                     }
                     
@@ -108,35 +114,52 @@ private extension Product {
         VStack {
             HStack{
                 VStack {
-                    Text("Goat")
+                    Image("goat_logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100)
                     Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[0]))
-                }.padding()
-                Spacer()
+                }
+                .padding(20)
+//                .padding(.leading, 20)
+//                Spacer()
+                Divider()
                 VStack {
-                    Text("Flight Club")
+                    Image("flightclub")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100)
                     Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[1]))
-                }.padding()
+                }
+            .padding(20)
+//                .padding(.trailing, 20)
             }
-            //            Spacer()
-            HStack {
-                Text(String(format: "%.1f", self.size))
-                self.chooseSize
-            }
-            .padding()
-//            self.chooseSize
-//                .padding()
+//            Spacer()
+            Divider()
             HStack {
                 VStack {
-                    Text("StockX")
+                    Image("stockx")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100)
                     Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[2]))
-                }.padding()
-                Spacer()
+                }
+                .padding(20)
+//                .padding(.leading, 20)
+//                Spacer()
+                Divider()
                 VStack {
-                    Text("Stadium Goods")
+                    Image("stadiumgoods")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100)
                     Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[3]))
-                }.padding()
+                }
+            .padding(20)
+//                .padding(.trailing, 20)
             }
         }
+        .padding(.bottom,20)
     }
     
     
