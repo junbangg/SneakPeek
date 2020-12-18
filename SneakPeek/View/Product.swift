@@ -31,8 +31,8 @@ struct Product: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 300)
                         self.productDetails
-                        self.chooseSize
-                            .padding(.horizontal, 10)
+                        //                        self.chooseSize
+                        //                            .padding(.horizontal, 10)
                         self.links
                     }
                     
@@ -54,14 +54,19 @@ private extension Product {
             HStack {
                 Text("제품명")
                     .foregroundColor(.gray)
+                    .padding(.leading)
+                Spacer()
                 Text(viewmodel.productDatasource!.shoeName)
+                    .padding(.trailing)
             }
             .padding(.bottom, 20)
             HStack {
                 HStack {
                     Text("발매일")
                         .foregroundColor(.gray)
+                        .padding(.leading)
                     Text(viewmodel.productDatasource!.releaseDate)
+                        .padding(.trailing)
                 }
                 .padding(.horizontal, 10)
                 Spacer()
@@ -84,13 +89,13 @@ private extension Product {
                     
                 }
             }
-           
+            
         }
         
     }
     var chooseSize : some View {
         HStack {
-            Stepper("사이즈", onIncrement: {
+            Stepper("", onIncrement: {
                 self.size += 0.5
             }, onDecrement: {
                 self.size -= 0.5
@@ -113,8 +118,13 @@ private extension Product {
                 }.padding()
             }
             //            Spacer()
-            Text(String(format: "%.1f", self.size))
-                .padding()
+            HStack {
+                Text(String(format: "%.1f", self.size))
+                self.chooseSize
+            }
+            .padding()
+//            self.chooseSize
+//                .padding()
             HStack {
                 VStack {
                     Text("StockX")
