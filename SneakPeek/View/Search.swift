@@ -11,11 +11,11 @@ import SwiftKeychainWrapper
 
 struct Search: View {
     @ObservedObject var viewModel : SearchViewModel
-//    @ObservedObject var productViewModel : ProductViewModel
+    //    @ObservedObject var productViewModel : ProductViewModel
     
     init(viewModel : SearchViewModel) {
         self.viewModel = viewModel
-//        self.productViewModel = productViewModel
+        //        self.productViewModel = productViewModel
     }
     @State private var inputSwitch : Bool = false
     @State private var shoeID : String = ""
@@ -33,9 +33,13 @@ struct Search: View {
                         searchEmpty
                     } else {
                         searchField
+                        //                        if viewModel.datasource.isEmpty {
+                        //                            Loader()
+                        //                        }
                         List {
                             if viewModel.datasource.isEmpty {
                                 emptySection
+                                //                                Loader()
                             }
                             results
                         }
@@ -93,9 +97,9 @@ private extension Search {
             ForEach(viewModel.datasource) { result in
                 NavigationButton(action: {
                     let _ : Bool = KeychainWrapper.standard.set(result.id, forKey: "shoeID")
-//                    self.shoeID = result.id
+                    //                    self.shoeID = result.id
                 }, destination: {
-//                    Product(viewmodel: self.productViewModel)
+                    //                    Product(viewmodel: self.productViewModel)
                     self.viewModel.ProductDetails
                 }) {
                     SearchResult.init(viewModel: result, shoeID: result.id)
@@ -106,13 +110,13 @@ private extension Search {
     }
     var searchEmpty : some View {
         Section {
-            Text("Search prices for your favorite shoe!")
+            Text("신발의 리셀 가격 한 눈에 확인하세요!")
                 .foregroundColor(.gray)
         }
     }
     var emptySection: some View {
         Section {
-            Text("No Results")
+            Text("검색 할 신발을 입력해주세요!")
                 .foregroundColor(.gray)
         }
         

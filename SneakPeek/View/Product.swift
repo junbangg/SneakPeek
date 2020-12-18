@@ -91,7 +91,7 @@ private extension Product {
                 HStack {
                     Text("정가")
                         .foregroundColor(.gray)
-                    Text("\(viewmodel.productDatasource!.retailPrice)")
+                    Text("$\(viewmodel.productDatasource!.retailPrice)")
                 }
                 .padding(.trailing, 20)
                 
@@ -118,8 +118,6 @@ private extension Product {
             }, onDecrement: {
                 self.size -= 0.5
             })
-            
-            //                            Text(String(format: "%.1f", self.size))
         }
     }
     var links : some View {
@@ -130,23 +128,19 @@ private extension Product {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150)
-                    Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[0]))
+                    Text("$" + String(self.viewmodel.productDatasource!.getSize(size:self.size)[0]))
                 }
                 .padding(20)
-//                .padding(.leading, 20)
-//                Spacer()
                 Divider()
                 VStack {
                     Image("flightclub")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150)
-                    Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[1]))
+                    Text("$" + String(self.viewmodel.productDatasource!.getSize(size:self.size)[1]))
                 }
             .padding(20)
-//                .padding(.trailing, 20)
             }
-//            Spacer()
             Divider()
             HStack {
                 VStack {
@@ -154,21 +148,18 @@ private extension Product {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150)
-                    Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[2]))
+                    Text("$" + String(self.viewmodel.productDatasource!.getSize(size:self.size)[2]))
                 }
                 .padding(20)
-//                .padding(.leading, 20)
-//                Spacer()
                 Divider()
                 VStack {
                     Image("stadiumgoods")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150)
-                    Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[3]))
+                    Text("$" + String(self.viewmodel.productDatasource!.getSize(size:self.size)[3]))
                 }
             .padding(20)
-//                .padding(.trailing, 20)
             }
         }
         .padding(.bottom,20)
@@ -176,16 +167,3 @@ private extension Product {
     
     
 }
-
-//struct Link : View {
-//    let ind : Int
-//    var body: some View {
-//        Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[ind]))
-//    }
-//}
-
-//struct Product_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Product()
-//    }
-//}
