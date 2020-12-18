@@ -30,7 +30,16 @@ struct Product: View {
                         Thumbnail(url: self.viewmodel.productDatasource!.thumbnail)
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 300)
-                        self.productDetails
+                        HStack {
+                            Text("제품명")
+                                .foregroundColor(.gray)
+                                .padding(.leading)
+                            Spacer()
+                            Text(self.viewmodel.productDatasource!.shoeName)
+                                .padding(.trailing)
+                        }
+                        .padding(.trailing,20)
+                        .padding(.bottom, 20)
                         HStack {
                             Text("Size:")
                                 .foregroundColor(.gray)
@@ -40,6 +49,7 @@ struct Product: View {
                         }
                         .padding()
                         self.links
+                        self.productDetails
                     }
                     
                 }
@@ -57,15 +67,16 @@ struct Product: View {
 private extension Product {
     var productDetails : some View {
         VStack {
-            HStack {
-                Text("제품명")
-                    .foregroundColor(.gray)
-                    .padding(.leading)
-                Spacer()
-                Text(viewmodel.productDatasource!.shoeName)
-                    .padding(.trailing)
-            }
-            .padding(.bottom, 20)
+//            HStack {
+//                Text("제품명")
+//                    .foregroundColor(.gray)
+//                    .padding(.leading)
+//                Spacer()
+//                Text(viewmodel.productDatasource!.shoeName)
+//                    .padding(.trailing)
+//            }
+//            .padding(.trailing,20)
+//            .padding(.bottom, 20)
             HStack {
                 HStack {
                     Text("발매일")
@@ -74,14 +85,14 @@ private extension Product {
                     Text(viewmodel.productDatasource!.releaseDate)
                         .padding(.trailing)
                 }
-                .padding(.horizontal, 10)
+//                .padding(.horizontal, 10)
                 Spacer()
                 HStack {
                     Text("정가")
                         .foregroundColor(.gray)
                     Text("\(viewmodel.productDatasource!.retailPrice)")
                 }
-                .padding(.horizontal, 10)
+                .padding(.trailing, 20)
                 
             }
             .padding(.bottom, 20)
@@ -117,7 +128,7 @@ private extension Product {
                     Image("goat_logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 100)
+                    .frame(width: 150)
                     Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[0]))
                 }
                 .padding(20)
@@ -128,7 +139,7 @@ private extension Product {
                     Image("flightclub")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 100)
+                    .frame(width: 150)
                     Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[1]))
                 }
             .padding(20)
@@ -141,7 +152,7 @@ private extension Product {
                     Image("stockx")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 100)
+                    .frame(width: 150)
                     Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[2]))
                 }
                 .padding(20)
@@ -152,7 +163,7 @@ private extension Product {
                     Image("stadiumgoods")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 100)
+                    .frame(width: 150)
                     Text(String(self.viewmodel.productDatasource!.getSize(size:self.size)[3]))
                 }
             .padding(20)
