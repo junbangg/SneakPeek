@@ -1,7 +1,7 @@
 # SneakPeek
 신발의 리셀 가격을 비교해주는 iOS 앱
 
-# 사용하고 배운 기술
+# 사용한 기술
 SwiftUI
 
 Combine
@@ -9,3 +9,8 @@ Combine
 MVVM 디자인 패턴
 
 Rest API 통신
+
+Node JS 백엔드로 외부 API 와 통신(SneaksAPI: https://github.com/druv5319/Sneaks-API)
+
+
+
