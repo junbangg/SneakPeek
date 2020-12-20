@@ -3,6 +3,9 @@
 
 # 사용하고 배운 기술
 SwiftUI
+
 Combine
+
 MVVM 디자인 패턴
+
 Rest API 통신
