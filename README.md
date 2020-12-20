@@ -16,16 +16,16 @@ Node JS 백엔드로 외부 API 와 통신(SneaksAPI: https://github.com/druv531
 # 사용 예
 
 
-![alt text](https://github.com/junbangg/LichessAnalysis/blob/master/img/home?raw=true)
+![alt text](https://github.com/junbangg/SneakPeek/blob/master/img/home?raw=true)
 홈 화면
 
-![alt text](https://github.com/junbangg/LichessAnalysis/blob/master/img/search?raw=true)
+![alt text](https://github.com/junbangg/SneakPeek/blob/master/img/search?raw=true)
 검색 화면(반응성 프로그래밍을 적용했기 때문에 사용자가 입력할때 함께 실시간으로 뷰가 업데이트 된다
 
-![alt text](https://github.com/junbangg/LichessAnalysis/blob/master/img/load?raw=true)
+![alt text](https://github.com/junbangg/SneakPeek/blob/master/img/load?raw=true)
 로딩 애니메이션
 
-![alt text](https://github.com/junbangg/LichessAnalysis/blob/master/img/result?raw=true)
+![alt text](https://github.com/junbangg/SneakPeek/blob/master/img/result?raw=true)
 결과 정보
 (4개의 사이트 링크도 연결 할 예정)
 
