@@ -20,7 +20,7 @@ Node JS 백엔드로 외부 API 와 통신(SneaksAPI: https://github.com/druv531
 
 ## 검색 화면
 ![alt text](https://github.com/junbangg/SneakPeek/blob/master/img/search.png?raw=true)
-###반응성 프로그래밍을 적용했기 때문에 사용자가 입력할때 함께 실시간으로 뷰가 업데이트 된다
+### 반응성 프로그래밍을 적용했기 때문에 사용자가 입력할때 함께 실시간으로 뷰가 업데이트 된다
 
 ## 로딩 애니메이션
 ![alt text](https://github.com/junbangg/SneakPeek/blob/master/img/load.png?raw=true)
