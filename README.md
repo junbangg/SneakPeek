@@ -2,7 +2,9 @@
 신발의 리셀 가격을 비교해주는 iOS 앱
 
 # 사용한 기술
-SwiftUI/Swift5
+SwiftUI
+
+Swift5
 
 Combine
 
