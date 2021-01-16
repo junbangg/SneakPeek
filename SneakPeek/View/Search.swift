@@ -5,6 +5,7 @@
 //  Created by Jun suk Bang on 2020/11/22.
 //  Copyright © 2020 Jun suk Bang. All rights reserved.
 //
+// MARK: - TODO! Change the structure of Search/Nonsearch view
 
 import SwiftUI
 import SwiftKeychainWrapper
