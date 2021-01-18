@@ -12,7 +12,6 @@ import SwiftKeychainWrapper
 
 class SearchViewModel : ObservableObject {
     @Published var shoe : String = ""
-//    @Published var shoeID : String = ""
     @State var inputSwitch : Bool = false
     @Published var datasource : [SearchResultViewModel] = []
     @Published var productDatasource : ProductDetailsViewModel?

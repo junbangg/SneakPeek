@@ -34,13 +34,9 @@ struct Search: View {
                         searchEmpty
                     } else {
                         searchField
-                        //                        if viewModel.datasource.isEmpty {
-                        //                            Loader()
-                        //                        }
                         List {
                             if viewModel.datasource.isEmpty {
                                 emptySection
-                                //                                Loader()
                             }
                             results
                         }

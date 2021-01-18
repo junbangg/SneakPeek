@@ -6,6 +6,10 @@
 //  Copyright © 2020 Jun Bang. All rights reserved.
 //
 
+
+//MARK: - TODO Fix error when retreiving prices
+
+
 import Foundation
 import Combine
 //
@@ -67,19 +71,16 @@ extension APINetworking : APIRequest {
     /// - Parameters:
     ///     - request: receives URLRequest prepared by  functions in extension
     /// - Returns:  JSON Object
+    // - TODO: ERROR when clicking product..retreiving prices
     private func sendPriceRequest<T> (with request : URLRequest) -> AnyPublisher<T, APIError> where T : Decodable {
         return session.dataTaskPublisher(for: request)
             .mapError { error in
                 .badRequest(error.localizedDescription)
-        }//4
+        }
             .flatMap(maxPublishers: .max(1)) { pair in
                 decode(pair.data)
         }
-            //5
             .eraseToAnyPublisher()
-        //        .map{$0.data}
-        //        .decode(type: T.self, decoder: JSONDecoder())
-        //        .eraseToAnyPublisher()
     }
 }
 // MARK: -URL components
