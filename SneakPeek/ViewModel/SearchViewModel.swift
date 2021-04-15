@@ -35,7 +35,8 @@ class SearchViewModel : ObservableObject {
             //6
             .store(in: &disposables)
     }
-    
+    /// Changed self in closures to self?
+    /// weak  를 사용하면 self는 optional 이 돼야하기  때문
     func fetchShoe(forShoe shoe : String) {
         shoeFetcher.getProducts(shoeName: shoe)
             .map{response in
@@ -48,7 +49,7 @@ class SearchViewModel : ObservableObject {
                     case .failure:
                         //6
                         print(value)
-                        self.datasource = []
+                        self?.datasource = []
                     case .finished:
                         break
                     }
@@ -56,7 +57,7 @@ class SearchViewModel : ObservableObject {
                 receiveValue: { [weak self] shoe in
                     guard let self = self else { return }
                     //7
-                    self.datasource = shoe
+                    self?.datasource = shoe
 //                    print(shoe)
             })
             .store(in: &disposables)

@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftUI
-import Combine
 
 struct SearchResultViewModel : Identifiable {
     private let shoe : ShoeDataResponse
