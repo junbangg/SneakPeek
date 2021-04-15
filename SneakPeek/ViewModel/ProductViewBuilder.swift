@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum ProductViewBuilder {
     static func makeProductDetailView(

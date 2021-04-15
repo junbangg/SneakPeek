@@ -49,7 +49,7 @@ class SearchViewModel : ObservableObject {
                     case .failure:
                         //6
                         print(value)
-                        self?.datasource = []
+                        self.datasource = []
                     case .finished:
                         break
                     }
@@ -57,7 +57,7 @@ class SearchViewModel : ObservableObject {
                 receiveValue: { [weak self] shoe in
                     guard let self = self else { return }
                     //7
-                    self?.datasource = shoe
+                    self.datasource = shoe
 //                    print(shoe)
             })
             .store(in: &disposables)
