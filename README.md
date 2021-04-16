@@ -10,9 +10,9 @@
 
 #### MVVM 디자인 패턴
 
-#### Rest API 통신
+#### Rest API 통신 (SneaksAPI: https://github.com/druv5319/Sneaks-API)
 
-#### Node JS 백엔드로 외부 API 와 통신(SneaksAPI: https://github.com/druv5319/Sneaks-API)
+
 
 
 # 사용 예
