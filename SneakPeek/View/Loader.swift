@@ -8,6 +8,12 @@
 
 import SwiftUI
 
+
+/**
+    Custom loading animation
+ # Reference: https://stackoverflow.com/questions/64732655/why-is-this-rotating-animation-moving-vertically
+ */
+
 struct Loader: View {
     @State private var isLoading = false
     

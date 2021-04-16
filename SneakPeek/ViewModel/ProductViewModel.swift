@@ -9,22 +9,21 @@
 import Foundation
 import Combine
 
+
 class ProductViewModel : ObservableObject {
-    @Published var datasource : ProductDetailsViewModel?
-//    @Published var shoeID : String = ""
+    @Published var datasource : ShoeDetailsDataModel?
     private let shoeID : String
-    private let shoeFetcher : APIRequest
+    private let shoeFetcher : APINetworking
     private var disposables = Set<AnyCancellable>()
     
-    init(shoeID: String, shoeFetcher: APIRequest) {
-//        self.id = id
+    init(shoeID: String, shoeFetcher: APINetworking) {
         self.shoeID = shoeID
         self.shoeFetcher = shoeFetcher
     }
     
     func refresh() {
-        shoeFetcher.getProductPrices(shoeID: shoeID)
-            .map(ProductDetailsViewModel.init)
+        shoeFetcher.requestShoeDetails(shoeID: shoeID)
+            .map(ShoeDetailsDataModel.init)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] value in
                 guard let self = self else { return }

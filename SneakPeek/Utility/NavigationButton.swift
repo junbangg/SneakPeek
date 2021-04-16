@@ -6,10 +6,13 @@
 //  Copyright © 2020 Jun suk Bang. All rights reserved.
 //
 
-//Referenced from https://stackoverflow.com/questions/58897453/how-to-perform-an-action-after-navigationlink-is-tapped
-
 import SwiftUI
 
+/**
+ Custom Navigation Button
+ - Referenced: https://stackoverflow.com/questions/58897453/how-to-perform-an-action-after-navigationlink-is-tapped
+
+ */
 struct NavigationButton<Destination: View, Label: View>: View {
     var action: () -> Void = { }
     var destination: () -> Destination

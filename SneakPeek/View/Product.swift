@@ -10,7 +10,9 @@ import SwiftUI
 import Combine
 import SwiftKeychainWrapper
 
+/// View for Product Details
 struct Product: View {
+    /// ObservedObject to communicate with ViewModel
     @ObservedObject var viewmodel : SearchViewModel
     init(viewmodel: SearchViewModel) {
         self.viewmodel = viewmodel
@@ -18,8 +20,8 @@ struct Product: View {
     
     let sizes : [String] = ["4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5" ,"16", "16.5", "17", "17.5", "18"]
     @State private var size: Float = 4.0
-    //    @State private var size: Double = 0
     
+    //MARK: - View Body
     var body: some View {
         GeometryReader{ geometry in
             ScrollView{
@@ -57,14 +59,14 @@ struct Product: View {
                 .frame(width: geometry.size.width)
             }
                 
-            .onAppear(perform: self.viewmodel.refresh)
+            .onAppear(perform: self.viewmodel.fetchShoeDetails)
             
         }
         
         
     }
 }
-
+//MARK: - Product View
 private extension Product {
     var productDetails : some View {
         VStack {
@@ -111,6 +113,7 @@ private extension Product {
         }
         
     }
+    //MARK: - Size Stepper View
     var chooseSize : some View {
         HStack {
             Stepper("", onIncrement: {
@@ -120,6 +123,7 @@ private extension Product {
             })
         }
     }
+    //MARK: - Link Views
     var links : some View {
         VStack {
             HStack{

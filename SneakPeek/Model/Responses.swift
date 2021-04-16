@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - ResponseElement
 
-struct ShoeDataResponse: Codable {
+struct ShoeSearchResponse: Codable {
     let lowestResellPrice: LowestResellPrice?
     let imageLinks: [String]
     let id, shoeName, brand, silhoutte: String
@@ -29,7 +29,7 @@ struct ShoeDataResponse: Codable {
     }
 }
 // MARK: - PriceDataResponse
-struct PriceDataResponse: Codable {
+struct ShoeDetailsSearchResponse: Codable {
     let lowestResellPrice: LowestResellPrice
     let resellPrices: ResellPrices
     let imageLinks: [String]

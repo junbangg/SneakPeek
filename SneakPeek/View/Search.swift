@@ -5,24 +5,31 @@
 //  Created by Jun suk Bang on 2020/11/22.
 //  Copyright © 2020 Jun suk Bang. All rights reserved.
 //
-// MARK: - TODO! Change the structure of Search/Nonsearch view
+// MARK: - TODO Change the structure of Search/Nonsearch view
 
 import SwiftUI
 import SwiftKeychainWrapper
 
+/**
+ Logic:
+    1. Search View that receives Search input from User
+    2. Search query is sent to ViewModel (SearchViewModel)
+    3. Receives search result as [ShoeDataModel] from viewModel(SearchViewModel)
+    4. Presents Search Results
+ */
 struct Search: View {
+    //MARK: - Properties
+    /// view model that will provide all required data for the view
     @ObservedObject var viewModel : SearchViewModel
-    //    @ObservedObject var productViewModel : ProductViewModel
     
     init(viewModel : SearchViewModel) {
         self.viewModel = viewModel
-        //        self.productViewModel = productViewModel
     }
     @State private var inputSwitch : Bool = false
     @State private var shoeID : String = ""
     
+    //MARK: - View Body
     var body: some View {
-        
         NavigationView {
             ZStack {
                 VStack {
@@ -34,8 +41,9 @@ struct Search: View {
                         searchEmpty
                     } else {
                         searchField
+                        /// Search Results are presented here
                         List {
-                            if viewModel.datasource.isEmpty {
+                            if viewModel.searchDatasource.isEmpty {
                                 emptySection
                             }
                             results
@@ -47,14 +55,14 @@ struct Search: View {
                 .navigationBarTitle("SneakPeek")
                 .navigationBarHidden(true)
             }
-            //            .background(MyColors.cactusJack)
-            
         }
         
     }
 }
 
+//MARK: - Extensions
 private extension Search {
+    //MARK: - Custom Logo view
     var logo : some View {
         Image("Chicago")
             .resizable()
@@ -62,6 +70,7 @@ private extension Search {
             .frame(width: 300)
             .padding(.top,30)
     }
+    //MARK: - Search button view
     var searchButton : some View {
         Button(action: {
             self.inputSwitch = true
@@ -79,6 +88,7 @@ private extension Search {
                 .padding(40)
         }.buttonStyle(PlainButtonStyle())
     }
+    //MARK: - Search Field view
     var searchField : some View {
         TextField("Jordan Chicago", text: $viewModel.shoe)
             .padding()
@@ -87,11 +97,10 @@ private extension Search {
             .padding(.bottom, 20)
             .padding()
     }
-    //SearchResult.init(viewModel:)
-    // Product(viewmodel: self.productViewModel)
+    //MARK: - results view
     var results : some View {
         Section {
-            ForEach(viewModel.datasource) { result in
+            ForEach(viewModel.searchDatasource) { result in
                 NavigationButton(action: {
                     let _ : Bool = KeychainWrapper.standard.set(result.id, forKey: "shoeID")
                     //                    self.shoeID = result.id
@@ -105,12 +114,14 @@ private extension Search {
             }
         }
     }
+    //MARK: - View for when search is empty
     var searchEmpty : some View {
         Section {
             Text("신발의 리셀 가격 한 눈에 확인하세요!")
                 .foregroundColor(.gray)
         }
     }
+    //MARK: - View for Empty section
     var emptySection: some View {
         Section {
             Text("검색 할 신발을 입력해주세요!")

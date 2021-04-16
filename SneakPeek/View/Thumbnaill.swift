@@ -1,12 +1,16 @@
 import SwiftUI
 
-//Referenced from https://www.hackingwithswift.com/forums/swiftui/loading-images/3292
 
+/**
+ View for displaying thumbnail ( preview of shoe)
+ - Reference : https://www.hackingwithswift.com/forums/swiftui/loading-images/3292
+ */
 struct Thumbnail: View {
+    ///Enumeration to differentiate states of app
     private enum LoadState {
         case loading, success, failure
     }
-
+    /// Loader
     private class Loader: ObservableObject {
         var data = Data()
         var state = LoadState.loading

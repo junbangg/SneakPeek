@@ -9,9 +9,10 @@
 import Foundation
 import SwiftUI
 
+/// Uses the data from APINetworking to build a Product view with appropriate data
 enum ProductViewBuilder {
     static func makeProductDetailView(
-        shoeFetcher : APIRequest
+        shoeFetcher : APINetworking
     ) -> some View {
         let viewmodel = SearchViewModel(shoeFetcher: shoeFetcher)
         return Product(viewmodel: viewmodel)

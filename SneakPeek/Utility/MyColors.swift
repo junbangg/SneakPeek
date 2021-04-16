@@ -10,6 +10,7 @@
 import Foundation
 import SwiftUI
 
+/// Struct that stores custom Colors
 struct MyColors {
     static let lightGreyColor = Color(red: 239/255, green: 243/255, blue: 244/255, opacity: 1.0)
 //    static let lightGreyColor = Color(red: 132.0/255.0, green: 132.0/255.0, blue: 132.0/255.0, opacity: 1.0)

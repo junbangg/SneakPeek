@@ -8,9 +8,10 @@
 
 import Foundation
 
-struct ProductDetailsViewModel{
+/// DataModel for presenting shoe details in Product view
+struct ShoeDetailsDataModel {
     
-    private let details : PriceDataResponse
+    private let details : ShoeDetailsSearchResponse
     
     var shoeName : String {
         return details.shoeName
@@ -51,7 +52,7 @@ struct ProductDetailsViewModel{
         return sizeList
     }
     
-    init(details : PriceDataResponse) {
+    init(details : ShoeDetailsSearchResponse) {
         self.details = details
     }
     

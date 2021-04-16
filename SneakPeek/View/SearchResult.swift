@@ -7,14 +7,18 @@
 //
 
 import SwiftUI
-
+/**
+ View for presenting each search result
+ */
 struct SearchResult: View {
-    private let viewModel : SearchResultViewModel
+    //MARK: - Properties
+    private let viewModel : ShoeDataModel
     private let shoeID : String
-    init(viewModel: SearchResultViewModel, shoeID : String) {
+    init(viewModel: ShoeDataModel, shoeID : String) {
         self.viewModel = viewModel
         self.shoeID = viewModel.styleID
     }
+    //MARK: - View body
     var body: some View {
             HStack {
                 //Thumbnail
@@ -25,7 +29,6 @@ struct SearchResult: View {
                 Text("\(viewModel.shoeName)")
                     .font(.footnote)
             }
-            
         .padding()
     }
 }

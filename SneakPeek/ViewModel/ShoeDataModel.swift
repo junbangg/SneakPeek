@@ -1,5 +1,5 @@
 //
-//  ShoeRowViewModel.swift
+//  SearchResultData.swift
 //  SneakPeek
 //
 //  Created by Jun suk Bang on 2020/11/22.
@@ -9,8 +9,9 @@
 import Foundation
 import SwiftUI
 
-struct SearchResultViewModel : Identifiable {
-    private let shoe : ShoeDataResponse
+/// DataModel for presenting search results to the Search view
+struct ShoeDataModel : Identifiable {
+    private let shoe : ShoeSearchResponse
     
     var id: String {
         return styleID
@@ -32,7 +33,7 @@ struct SearchResultViewModel : Identifiable {
     var retailPrice : Int {
         return shoe.retailPrice ?? 0
     }
-    init(shoe: ShoeDataResponse) {
+    init(shoe: ShoeSearchResponse) {
         self.shoe = shoe
     }
     
