@@ -24,6 +24,7 @@ class ProductViewModel : ObservableObject {
     func refresh() {
         shoeFetcher.requestShoeDetails(shoeID: shoeID)
             .map(ShoeDetailsDataModel.init)
+            ///main 이 맞을까
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] value in
                 guard let self = self else { return }

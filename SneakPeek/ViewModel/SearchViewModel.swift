@@ -60,6 +60,7 @@ class SearchViewModel : ObservableObject {
             ///ShoeSearchResponse -> ShoeDataModel
             .map{response in
                 response.map(ShoeDataModel.init)}
+            /// main 으로 받는게 맞을까?
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] value in
