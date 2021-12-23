@@ -10,29 +10,28 @@ import Foundation
 import SwiftUI
 
 /// DataModel for presenting search results to the Search view
-struct ShoeDataModel : Identifiable {
-    private let shoe : ShoeSearchResponse
+struct ShoeDataModel: Identifiable {
+    private let shoe: ShoeSearchResponse
     
     var id: String {
         return styleID
     }
-    
     var shoeName: String {
         return shoe.shoeName
     }
-    var brand : String {
+    var brand: String {
         return shoe.brand
     }
-    var styleID : String {
+    var styleID: String {
         return shoe.styleID
     }
-    
-    var thumbnail : String {
+    var thumbnail: String {
         return shoe.thumbnail
     }
-    var retailPrice : Int {
+    var retailPrice: Int {
         return shoe.retailPrice ?? 0
     }
+    
     init(shoe: ShoeSearchResponse) {
         self.shoe = shoe
     }

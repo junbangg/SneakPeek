@@ -9,11 +9,10 @@
 import Foundation
 import Combine
 
-
-class ProductViewModel : ObservableObject {
-    @Published var datasource : ShoeDetailsDataModel?
+class ProductViewModel: ObservableObject {
+    @Published var datasource: ShoeDetailsDataModel?
     private let shoeID : String
-    private let shoeFetcher : APINetworking
+    private let shoeFetcher: APINetworking
     private var disposables = Set<AnyCancellable>()
     
     init(shoeID: String, shoeFetcher: APINetworking) {
@@ -24,7 +23,6 @@ class ProductViewModel : ObservableObject {
     func refresh() {
         shoeFetcher.requestShoeDetails(shoeID: shoeID)
             .map(ShoeDetailsDataModel.init)
-            ///main 이 맞을까
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] value in
                 guard let self = self else { return }

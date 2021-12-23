@@ -6,7 +6,6 @@
 //  Copyright © 2020 Jun suk Bang. All rights reserved.
 //
 
-
 import Foundation
 import SwiftUI
 

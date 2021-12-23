@@ -22,21 +22,21 @@ import SwiftKeychainWrapper
  */
  
 /// ViewModel for Search View
-class SearchViewModel : ObservableObject {
+class SearchViewModel: ObservableObject {
     //MARK: - Publishers and States
-    @Published var shoe : String = ""
-    @State var inputSwitch : Bool = false
+    @Published var shoe: String = ""
+    @State var inputSwitch: Bool = false
     /// Publisher that Search view will subscribe to in order to receive SearchResultData
-    @Published var searchDatasource : [ShoeDataModel] = []
+    @Published var searchDatasource: [ShoeDataModel] = []
     /// Publisher that Search view will subscribe to in order to receive SearchResultData
-    @Published var productDatasource : ShoeDetailsDataModel?
+    @Published var productDatasource: ShoeDetailsDataModel?
     /// property for communicating with Model(APIRequest)
-    private let shoeFetcher : APINetworking
+    private let shoeFetcher: APINetworking
     /// Trash can
     private var disposables = Set<AnyCancellable>()
     //MARK: - init
     init(
-        shoeFetcher : APINetworking,
+        shoeFetcher: APINetworking,
         scheduler: DispatchQueue = DispatchQueue(label: "SearchViewModel")
     ) {
         self.shoeFetcher = shoeFetcher
@@ -55,7 +55,7 @@ class SearchViewModel : ObservableObject {
         3. save the converted [ShoeDataModel] to the shoeDatasource Publisher
      - Parameter shoe: Search query
     */
-    func fetchShoe(forShoe shoe : String) {
+    func fetchShoe(forShoe shoe: String) {
         shoeFetcher.requestShoe(shoeName: shoe)
             ///ShoeSearchResponse -> ShoeDataModel
             .map{response in
@@ -89,7 +89,7 @@ class SearchViewModel : ObservableObject {
      */
     func fetchShoeDetails() {
         //Retreive searched shoeID from keychain
-        let shoeID : String? = KeychainWrapper.standard.string(forKey: "shoeID")
+        let shoeID: String? = KeychainWrapper.standard.string(forKey: "shoeID")
         shoeFetcher.requestShoeDetails(shoeID: shoeID!)
             /// ShoeDetailsSearchResponse -> ShoeDetailsDataModel
             .map(ShoeDetailsDataModel.init)
