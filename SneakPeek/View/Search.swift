@@ -9,7 +9,6 @@
 
 import SwiftUI
 import SwiftKeychainWrapper
-
 /**
  Logic:
     1. Search View that receives Search input from User
@@ -19,16 +18,20 @@ import SwiftKeychainWrapper
  */
 struct Search: View {
     //MARK: - Properties
+    
     /// view model that will provide all required data for the view
     @ObservedObject var viewModel : SearchViewModel
+    @State private var inputSwitch: Bool = false
+    @State private var shoeID: String = ""
     
-    init(viewModel : SearchViewModel) {
+    //MARK: - Initializer
+    
+    init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
     }
-    @State private var inputSwitch : Bool = false
-    @State private var shoeID : String = ""
     
     //MARK: - View Body
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -61,9 +64,11 @@ struct Search: View {
 }
 
 //MARK: - Extensions
+
 private extension Search {
     //MARK: - Custom Logo view
-    var logo : some View {
+    
+    var logo: some View {
         Image("Chicago")
             .resizable()
             .aspectRatio(contentMode: .fit)
@@ -71,12 +76,12 @@ private extension Search {
             .padding(.top,30)
     }
     //MARK: - Search button view
-    var searchButton : some View {
+    
+    var searchButton: some View {
         Button(action: {
             self.inputSwitch = true
         }) {
             HStack {
-                
                 Text("Jordan Chicago")
                 Spacer()
                 Spacer()
@@ -89,7 +94,8 @@ private extension Search {
         }.buttonStyle(PlainButtonStyle())
     }
     //MARK: - Search Field view
-    var searchField : some View {
+    
+    var searchField: some View {
         TextField("Jordan Chicago", text: $viewModel.shoe)
             .padding()
             .background(MyColors.lightGreyColor)
@@ -98,11 +104,12 @@ private extension Search {
             .padding()
     }
     //MARK: - results view
-    var results : some View {
+    
+    var results: some View {
         Section {
             ForEach(viewModel.searchDatasource) { result in
                 NavigationButton(action: {
-                    let _ : Bool = KeychainWrapper.standard.set(result.id, forKey: "shoeID")
+                    let _: Bool = KeychainWrapper.standard.set(result.id, forKey: "shoeID")
                     //                    self.shoeID = result.id
                 }, destination: {
                     //                    Product(viewmodel: self.productViewModel)
@@ -115,19 +122,19 @@ private extension Search {
         }
     }
     //MARK: - View for when search is empty
-    var searchEmpty : some View {
+    
+    var searchEmpty: some View {
         Section {
             Text("신발의 리셀 가격 한 눈에 확인하세요!")
                 .foregroundColor(.gray)
         }
     }
     //MARK: - View for Empty section
+    
     var emptySection: some View {
         Section {
             Text("검색 할 신발을 입력해주세요!")
                 .foregroundColor(.gray)
         }
-        
     }
-    
 }
