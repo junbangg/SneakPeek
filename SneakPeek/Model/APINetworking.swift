@@ -13,22 +13,28 @@ import Foundation
 import Combine
 
 // MARK: - Protocol
+
 protocol APIRequest {
     //Get Products
-    func requestShoe(shoeName : String) -> AnyPublisher<[ShoeSearchResponse], Error>
-    func requestShoeDetails(shoeID : String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError>
+    func requestShoe(shoeName: String) -> AnyPublisher<[ShoeSearchResponse], Error>
+    func requestShoeDetails(shoeID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError>
     
 }
+
 // MARK: - Main Class
+
 class APINetworking {
-    private let session : URLSession
+    private let session: URLSession
     init(session: URLSession = .shared) {
         self.session = session
     }
 }
+
 // MARK: - Protocol methods
-extension APINetworking : APIRequest {
+
+extension APINetworking: APIRequest {
     //MARK: -getProducts
+    
     ///
     /// - Parameters:
     ///     - shoeName: shoe name search : String
@@ -36,7 +42,9 @@ extension APINetworking : APIRequest {
     func requestShoe(shoeName: String) -> AnyPublisher<[ShoeSearchResponse], Error> {
         return sendShoeSearchRequest(with: prepareForShoeSearch(shoeName: shoeName))
     }
+    
     //MARK: -getProductPrices
+    
     ///
     /// - Parameters:
     ///     - shoeID: String
@@ -46,12 +54,12 @@ extension APINetworking : APIRequest {
     }
     
     //MARK: - send shoe request to API
+    
     ///
     /// - Parameters:
     ///     - request: receives URLRequest prepared by  functions in extension
     /// - Returns: An array of JSON Objects
-    private func sendShoeSearchRequest<T> (with request : URLRequest) -> AnyPublisher<[T], Error> where T : Decodable{
-        
+    private func sendShoeSearchRequest<T> (with request: URLRequest) -> AnyPublisher<[T], Error> where T: Decodable{
         return session.dataTaskPublisher(for: request)
             //            .mapError { error in
             //                .badRequest(error.localizedDescription)
@@ -62,15 +70,16 @@ extension APINetworking : APIRequest {
             //            decode(response.data)
             //        }
             .eraseToAnyPublisher()
-        
     }
+    
     //MARK: - send shoe details request to API
+    
     ///
     /// - Parameters:
     ///     - request: receives URLRequest prepared by  functions in extension
     /// - Returns:  JSON Object
     // - TODO: ERROR when clicking product..retreiving prices
-    private func sendShoeDetailsRequest<T> (with request : URLRequest) -> AnyPublisher<T, APIError> where T : Decodable {
+    private func sendShoeDetailsRequest<T> (with request: URLRequest) -> AnyPublisher<T, APIError> where T: Decodable {
         return session.dataTaskPublisher(for: request)
             .mapError { error in
                 .badRequest(error.localizedDescription)
@@ -81,23 +90,25 @@ extension APINetworking : APIRequest {
             .eraseToAnyPublisher()
     }
 }
+
 // MARK: -URL components
+
 private extension APINetworking {
     
     //http://localhost:3000
     struct BaseAPI {
-        static let baseURL : String = "http://localhost:3000/"
-        static let search : String = "search/"
+        static let baseURL: String = "http://localhost:3000/"
+        static let search: String = "search/"
     }
     
-    
     //MARK: -prepare shoe search
+    
     ///
     /// - Parameters:
     ///     - shoeName: shoe name : String for search
     /// - Returns: URLRequest
     func prepareForShoeSearch(shoeName: String) -> URLRequest {
-        //MARK: - TODO Error handeling
+        //TODO: Error handeling
         let urlstring = BaseAPI.baseURL + BaseAPI.search + shoeName
         
         if let url = URL(string: urlstring) {
@@ -113,10 +124,10 @@ private extension APINetworking {
             dataRequest.httpMethod = "GET"
             return dataRequest
         }
-        
-        
     }
+    
     //MARK: - prepare shoe details search
+    
     ///
     /// - Parameters:
     ///     - shoeID: id for shoe : String for search
@@ -130,6 +141,4 @@ private extension APINetworking {
         
         return dataRequest
     }
-    
-    
 }
