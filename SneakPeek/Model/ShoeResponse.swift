@@ -23,10 +23,9 @@ struct ShoeResponse: Codable {
 
 // MARK: - Result
 struct Shoe: Codable, Identifiable {
-    let id, sku: String
-    let brand: Brand
+    let id, sku, brand: String
     let name, colorway: String
-    let gender: Gender
+    let gender: String
     let silhouette: String
     let releaseYear: Int
     let releaseDate: String
@@ -34,15 +33,6 @@ struct Shoe: Codable, Identifiable {
     let story: String
     let image: ShoeImages
     let links: Links
-}
-
-enum Brand: String, Codable {
-    case nike = "Nike"
-    case vans = "Vans"
-}
-
-enum Gender: String, Codable {
-    case men = "men"
 }
 
 // MARK: - Image
