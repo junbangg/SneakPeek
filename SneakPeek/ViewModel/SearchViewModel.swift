@@ -87,29 +87,29 @@ class SearchViewModel: ObservableObject {
         2. The search result(ShoeDetailsSearchResponse) will be mapped to ShoeDetailsDataModel
         3. save the converted [ShoeDetailsDataModel] to the productDatasource Publisher
      */
-    func fetchShoeDetails() {
-        //Retreive searched shoeID from keychain
-        let shoeID: String? = KeychainWrapper.standard.string(forKey: "shoeID")
-        shoeFetcher.requestShoeDetails(shoeID: shoeID!)
-            /// ShoeDetailsSearchResponse -> ShoeDetailsDataModel
-            .map(ShoeDetailsDataModel.init)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] value in
-                guard let self = self else { return }
-                switch value {
-                case .failure:
-                    print(value)
-                    self.fetchShoeDetails()
-                    self.productDatasource = nil
-                case .finished:
-                    break
-                }
-            }, receiveValue: { [weak self] details in
-                guard let self = self else { return }
-                self.productDatasource = details
-            })
-            .store(in: &disposables)
-    }
+//    func fetchShoeDetails() {
+//        //Retreive searched shoeID from keychain
+//        let shoeID: String? = KeychainWrapper.standard.string(forKey: "shoeID")
+//        shoeFetcher.requestShoeDetails(shoeID: shoeID!)
+//            /// ShoeDetailsSearchResponse -> ShoeDetailsDataModel
+//            .map(ShoeDetailsDataModel.init)
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveCompletion: { [weak self] value in
+//                guard let self = self else { return }
+//                switch value {
+//                case .failure:
+//                    print(value)
+//                    self.fetchShoeDetails()
+//                    self.productDatasource = nil
+//                case .finished:
+//                    break
+//                }
+//            }, receiveValue: { [weak self] details in
+//                guard let self = self else { return }
+//                self.productDatasource = details
+//            })
+//            .store(in: &disposables)
+//    }
 }
 /// Extension that will build a view with shoe data
 extension SearchViewModel {

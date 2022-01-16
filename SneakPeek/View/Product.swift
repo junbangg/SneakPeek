@@ -59,7 +59,7 @@ struct Product: View {
                 .frame(width: geometry.size.width)
             }
                 
-            .onAppear(perform: self.viewmodel.fetchShoeDetails)
+//            .onAppear(perform: self.viewmodel.fetchShoeDetails)
             
         }
         

@@ -17,7 +17,7 @@ import Combine
 protocol APIRequest {
     //Get Products
     func requestShoe(shoeName: String) -> AnyPublisher<[ShoeSearchResponse], Error>
-    func requestShoeDetails(shoeID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError>
+//    func requestShoeDetails(shoeID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError>
     
 }
 
@@ -40,18 +40,16 @@ extension APINetworking: APIRequest {
     ///     - shoeName: shoe name search : String
     /// - Returns: send(with: prepareForProductSearch())
     func requestShoe(shoeName: String) -> AnyPublisher<[ShoeSearchResponse], Error> {
-        return sendShoeSearchRequest(with: prepareForShoeSearch(shoeName: shoeName))
+        let request = prepareForShoeSearch(shoeName: shoeName, itemLimit: 10)
+        
+        return sendShoeSearchRequest(with: request)
     }
     
     //MARK: -getProductPrices
     
-    ///
-    /// - Parameters:
-    ///     - shoeID: String
-    /// - Returns: send()with: prepareForPriceSearch()
-    func requestShoeDetails(shoeID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError> {
-        return sendShoeDetailsRequest(with: prepareForShoeDetailsSearch(shoeID: shoeID))
-    }
+//    func requestShoeDetails(shoeID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError> {
+//        return sendShoeDetailsRequest(with: prepareForShoeDetailsSearch(shoeID: shoeID))
+//    }
     
     //MARK: - send shoe request to API
     
@@ -91,15 +89,36 @@ extension APINetworking: APIRequest {
     }
 }
 
-// MARK: -URL components
+// MARK: - URL components
 
 private extension APINetworking {
-    
-    //http://localhost:3000
-    struct BaseAPI {
-        static let baseURL: String = "http://localhost:4000/"
-        static let search: String = "search/"
+    private enum API {
+        private enum URLString {
+            static let baseURL = "https://the-sneaker-database.p.rapidapi.com/"
+        }
+        
+        private enum Path {
+            static let search = "search"
+        }
+        
+        enum APIKey {
+            static let apiKey = "ee9760ab69msh475edf1666457cbp1c3876jsn65c171d09766"
+        }
+        
+        case fetchShoe
+        
+        var url: String {
+            switch self {
+            case .fetchShoe:
+                return URLString.baseURL + Path.search
+            }
+        }
     }
+}
+
+// MARK: - Prepare methods
+
+private extension APINetworking {
     
     //MARK: -prepare shoe search
     
@@ -107,38 +126,22 @@ private extension APINetworking {
     /// - Parameters:
     ///     - shoeName: shoe name : String for search
     /// - Returns: URLRequest
-    func prepareForShoeSearch(shoeName: String) -> URLRequest {
-        //TODO: Error handeling
-        let urlstring = BaseAPI.baseURL + BaseAPI.search + shoeName
+    func prepareForShoeSearch(shoeName: String, itemLimit: Int) -> URLRequest {
+        let urlstring = API.fetchShoe.url + "?" + "limit=\(itemLimit)" + "&query=\(shoeName)"
+        let url = URL(string: urlstring)!
+//        let parameters: [String: Any] = ["limit": itemLimit, "query": shoeName]
+        let headers = ["x-rapidapi-key": API.APIKey.apiKey]
         
-        if let url = URL(string: urlstring) {
-            var dataRequest = URLRequest(url: url)
-            dataRequest.httpMethod = "GET"
-            print(url)
-            return dataRequest
-        }else {
-            let url = URL(fileURLWithPath: BaseAPI.baseURL + BaseAPI.search)
-            print("Failed:")
-            print(url)
-            var dataRequest = URLRequest(url: url)
-            dataRequest.httpMethod = "GET"
-            return dataRequest
-        }
-    }
-    
-    //MARK: - prepare shoe details search
-    
-    ///
-    /// - Parameters:
-    ///     - shoeID: id for shoe : String for search
-    /// - Returns: URLRequest
-    
-    //GET localhost:3000/id/:styleID/prices
-    func prepareForShoeDetailsSearch(shoeID: String) -> URLRequest {
-        let url = URL(string: BaseAPI.baseURL + "id/" + shoeID + "/prices")!
-        var dataRequest = URLRequest(url: url)
-        dataRequest.httpMethod = "GET"
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = headers
         
-        return dataRequest
+//        do {
+//            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+//        } catch let error {
+//            print(error.localizedDescription)
+//        }
+        
+        return request
     }
 }

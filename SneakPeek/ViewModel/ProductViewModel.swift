@@ -20,22 +20,22 @@ class ProductViewModel: ObservableObject {
         self.shoeFetcher = shoeFetcher
     }
     
-    func refresh() {
-        shoeFetcher.requestShoeDetails(shoeID: shoeID)
-            .map(ShoeDetailsDataModel.init)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] value in
-                guard let self = self else { return }
-                switch value {
-                case .failure:
-                    self.datasource = nil
-                case .finished:
-                    break
-                }
-                }, receiveValue: { [weak self] details in
-                    guard let self = self else { return }
-                    self.datasource = details
-            })
-            .store(in: &disposables)
-    }
+//    func refresh() {
+//        shoeFetcher.requestShoeDetails(shoeID: shoeID)
+//            .map(ShoeDetailsDataModel.init)
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveCompletion: { [weak self] value in
+//                guard let self = self else { return }
+//                switch value {
+//                case .failure:
+//                    self.datasource = nil
+//                case .finished:
+//                    break
+//                }
+//                }, receiveValue: { [weak self] details in
+//                    guard let self = self else { return }
+//                    self.datasource = details
+//            })
+//            .store(in: &disposables)
+//    }
 }
