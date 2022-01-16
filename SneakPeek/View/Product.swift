@@ -13,7 +13,8 @@ import SwiftKeychainWrapper
 /// View for Product Details
 struct Product: View {
     /// ObservedObject to communicate with ViewModel
-    @ObservedObject var viewmodel : SearchViewModel
+    @ObservedObject var viewmodel: SearchViewModel
+    
     init(viewmodel: SearchViewModel) {
         self.viewmodel = viewmodel
     }

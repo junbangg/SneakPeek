@@ -30,6 +30,8 @@
 		36842088256A2C4C00C74879 /* ShoeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36842087256A2C4C00C74879 /* ShoeDataModel.swift */; };
 		3684208B256A37C500C74879 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684208A256A37C500C74879 /* Search.swift */; };
 		3684208D256A399600C74879 /* MyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684208C256A399600C74879 /* MyColors.swift */; };
+		ED43EA99279408CD00A7DDA3 /* ShoeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED43EA98279408CD00A7DDA3 /* ShoeResponse.swift */; };
+		ED43EA9D27943F8000A7DDA3 /* ShoeSearchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED43EA9C27943F8000A7DDA3 /* ShoeSearchDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		3684208C256A399600C74879 /* MyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColors.swift; sourceTree = "<group>"; };
 		5C7B7CDCF73E83AF651E7A34 /* Pods_SneakPeek.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SneakPeek.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A97E829DAAA92C4C80AB7C /* Pods-SneakPeek.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SneakPeek.debug.xcconfig"; path = "Target Support Files/Pods-SneakPeek/Pods-SneakPeek.debug.xcconfig"; sourceTree = "<group>"; };
+		ED43EA98279408CD00A7DDA3 /* ShoeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeResponse.swift; sourceTree = "<group>"; };
+		ED43EA9C27943F8000A7DDA3 /* ShoeSearchDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeSearchDataModel.swift; sourceTree = "<group>"; };
 		F4587DCC95173B9753CC0EC1 /* Pods-SneakPeek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SneakPeek.release.xcconfig"; path = "Target Support Files/Pods-SneakPeek/Pods-SneakPeek.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +92,7 @@
 				3612D65625679B6F003361CE /* Responses.swift */,
 				3612D6582567A23F003361CE /* APINetworking.swift */,
 				3684207F2569203600C74879 /* Errors.swift */,
+				ED43EA98279408CD00A7DDA3 /* ShoeResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 				3618F4C42572304300E178EC /* ProductViewModel.swift */,
 				36842087256A2C4C00C74879 /* ShoeDataModel.swift */,
 				3618F4C62572339E00E178EC /* ProductDetailsDataModel.swift */,
+				ED43EA9C27943F8000A7DDA3 /* ShoeSearchDataModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -313,6 +319,8 @@
 				36583B5C256B96F70094C8AE /* SearchResult.swift in Sources */,
 				3618F4C52572304300E178EC /* ProductViewModel.swift in Sources */,
 				36675DA02566836B0098192B /* ContentView.swift in Sources */,
+				ED43EA9D27943F8000A7DDA3 /* ShoeSearchDataModel.swift in Sources */,
+				ED43EA99279408CD00A7DDA3 /* ShoeResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,8 @@ class SearchViewModel: ObservableObject {
     @Published var shoe: String = ""
     @State var inputSwitch: Bool = false
     /// Publisher that Search view will subscribe to in order to receive SearchResultData
-    @Published var searchDatasource: [ShoeDataModel] = []
+//    @Published var searchDatasource: [ShoeDataModel] = []
+    @Published var searchDatasource: ShoeSearchDataModel?
     /// Publisher that Search view will subscribe to in order to receive SearchResultData
     @Published var productDatasource: ShoeDetailsDataModel?
     /// property for communicating with Model(APIRequest)
@@ -57,9 +58,9 @@ class SearchViewModel: ObservableObject {
     */
     func fetchShoe(forShoe shoe: String) {
         shoeFetcher.requestShoe(shoeName: shoe)
-            ///ShoeSearchResponse -> ShoeDataModel
-            .map{response in
-                response.map(ShoeDataModel.init)}
+            .map(ShoeSearchDataModel.init)
+//            .map{response in
+//                response.map(ShoeDataModel.init)}
             /// main 으로 받는게 맞을까?
             .receive(on: DispatchQueue.main)
             .sink(
@@ -68,14 +69,15 @@ class SearchViewModel: ObservableObject {
                     switch value {
                     case .failure:
                         print(value)
-                        self.searchDatasource = []
+                        self.searchDatasource = nil
                     case .finished:
                         break
                     }
                 },
-                receiveValue: { [weak self] shoe in
+                receiveValue: { [weak self] searchResult in
                     guard let self = self else { return }
-                    self.searchDatasource = shoe
+                    print(searchResult)
+                    self.searchDatasource = searchResult
                 })
             .store(in: &disposables)
         

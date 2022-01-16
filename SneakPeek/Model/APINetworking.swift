@@ -16,7 +16,7 @@ import Combine
 
 protocol APIRequest {
     //Get Products
-    func requestShoe(shoeName: String) -> AnyPublisher<[ShoeSearchResponse], Error>
+    func requestShoe(shoeName: String) -> AnyPublisher<ShoeResponse, Error>
 //    func requestShoeDetails(shoeID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError>
     
 }
@@ -39,7 +39,7 @@ extension APINetworking: APIRequest {
     /// - Parameters:
     ///     - shoeName: shoe name search : String
     /// - Returns: send(with: prepareForProductSearch())
-    func requestShoe(shoeName: String) -> AnyPublisher<[ShoeSearchResponse], Error> {
+    func requestShoe(shoeName: String) -> AnyPublisher<ShoeResponse, Error> {
         let request = prepareForShoeSearch(shoeName: shoeName, itemLimit: 10)
         
         return sendShoeSearchRequest(with: request)
@@ -57,16 +57,16 @@ extension APINetworking: APIRequest {
     /// - Parameters:
     ///     - request: receives URLRequest prepared by  functions in extension
     /// - Returns: An array of JSON Objects
-    private func sendShoeSearchRequest<T> (with request: URLRequest) -> AnyPublisher<[T], Error> where T: Decodable{
+    private func sendShoeSearchRequest<T> (with request: URLRequest) -> AnyPublisher<T, Error> where T: Decodable{
         return session.dataTaskPublisher(for: request)
-            //            .mapError { error in
-            //                .badRequest(error.localizedDescription)
-            //        }
-            .map{$0.data}
-            .decode(type: [T].self, decoder: JSONDecoder())
-            //        .flatMap(maxPublishers: .max(1)) { response in
-            //            decode(response.data)
-            //        }
+//            .mapError { error in
+//                .badRequest(error.localizedDescription)
+//            }
+                        .map{$0.data}
+                        .decode(type: T.self, decoder: JSONDecoder())
+//            .flatMap(maxPublishers: .max(1)) { response in
+//                decode(response.data)
+//            }
             .eraseToAnyPublisher()
     }
     

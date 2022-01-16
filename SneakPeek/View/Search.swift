@@ -46,10 +46,11 @@ struct Search: View {
                         searchField
                         /// Search Results are presented here
                         List {
-                            if viewModel.searchDatasource.isEmpty {
+                            if viewModel.searchDatasource == nil {
                                 emptySection
+                            } else {
+                                results
                             }
-                            results
                         }
                         .listStyle(GroupedListStyle())
                     }
@@ -107,16 +108,18 @@ private extension Search {
     
     var results: some View {
         Section {
-            ForEach(viewModel.searchDatasource) { result in
-                NavigationButton(action: {
-                    let _: Bool = KeychainWrapper.standard.set(result.id, forKey: "shoeID")
-                    //                    self.shoeID = result.id
-                }, destination: {
-                    //                    Product(viewmodel: self.productViewModel)
-                    self.viewModel.ProductDetails
-                }) {
-                    SearchResult.init(viewModel: result, shoeID: result.id)
-                }
+            ForEach(viewModel.searchDatasource!.results) { shoe in
+                SearchResult.init(viewModel: shoe, shoeID: shoe.id)
+//                NavigationButton(action: {
+//                    let _: Bool = KeychainWrapper.standard.set(result.id, forKey: "shoeID")
+//                    //                    self.shoeID = result.id
+//                }, destination: {
+//                    Product(viewmodel: self.productViewModel)
+////                                        self.viewModel.ProductDetails
+//                }) {
+//
+//                    SearchResult.init(viewModel: shoe, shoeID: shoe.id)
+//                }
                 
             }
         }

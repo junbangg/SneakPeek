@@ -1,0 +1,63 @@
+//
+//  ShoeResponse.swift
+//  SneakPeek
+//
+//  Created by Jun Bang on 2022/01/16.
+//  Copyright © 2022 Jun suk Bang. All rights reserved.
+//
+
+import Foundation
+
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
+
+import Foundation
+
+// MARK: - Welcome
+struct ShoeResponse: Codable {
+    let count, totalPages: Int
+    let results: [Shoe]
+}
+
+// MARK: - Result
+struct Shoe: Codable, Identifiable {
+    let id, sku: String
+    let brand: Brand
+    let name, colorway: String
+    let gender: Gender
+    let silhouette: String
+    let releaseYear: Int
+    let releaseDate: String
+    let retailPrice, estimatedMarketValue: Int
+    let story: String
+    let image: ShoeImages
+    let links: Links
+}
+
+enum Brand: String, Codable {
+    case nike = "Nike"
+    case vans = "Vans"
+}
+
+enum Gender: String, Codable {
+    case men = "men"
+}
+
+// MARK: - Image
+struct ShoeImages: Codable {
+    let the360: [String]
+    let original, small, thumbnail: String
+
+    enum CodingKeys: String, CodingKey {
+        case the360 = "360"
+        case original, small, thumbnail
+    }
+}
+
+// MARK: - Links
+struct Links: Codable {
+    let stockX, goat: String
+    let flightClub, stadiumGoods: String
+}
