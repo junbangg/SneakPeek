@@ -15,7 +15,11 @@
 # Libraries
 #### SwiftKeyChainWrapper: https://github.com/jrendel/SwiftKeychainWrapper
 
+# TODO
+- API 단위 테스트
 
+# Troubleshooting
+- API 고장
 
 
 # 사용 예
