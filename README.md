@@ -20,6 +20,7 @@
 
 # Troubleshooting
 - API 고장
+- 검색 결과 상단에 빈공간 제거
 
 
 # 사용 예
