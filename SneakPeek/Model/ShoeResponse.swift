@@ -27,7 +27,7 @@ struct Shoe: Codable, Identifiable {
     let name, colorway: String
     let gender: String
     let silhouette: String
-    let releaseYear: Int
+    let releaseYear: String
     let releaseDate: String
     let retailPrice, estimatedMarketValue: Int
     let story: String
