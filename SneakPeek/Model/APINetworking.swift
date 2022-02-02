@@ -62,15 +62,13 @@ extension APINetworking: APIRequest {
     private func sendShoeSearchRequest<T> (with request: URLRequest) -> AnyPublisher<T, Error> where T: Decodable {
         return session.dataTaskPublisher(for: request)
             .mapError { _ in
-                APIError.badRequest("Error")
+                APIError.badRequest(nil)
             }
-                        .map{$0.data}
-                        
-                        .decode(type: T.self, decoder: JSONDecoder())
-//            .flatMap(maxPublishers: .max(1)) { response in
-//                decode(response.data)
-//            }
-                        
+            .map{ $0.data }
+            .decode(type: T.self, decoder: JSONDecoder())
+        //            .flatMap(maxPublishers: .max(1)) { response in
+        //                decode(response.data)
+        //            }
             .eraseToAnyPublisher()
     }
     
@@ -84,11 +82,11 @@ extension APINetworking: APIRequest {
     private func sendShoeDetailsRequest<T> (with request: URLRequest) -> AnyPublisher<T, APIError> where T: Decodable {
         return session.dataTaskPublisher(for: request)
             .mapError { error in
-                .badRequest(error.localizedDescription)
-        }
+            .badRequest(error.localizedDescription)
+            }
             .flatMap(maxPublishers: .max(1)) { pair in
                 decode(pair.data)
-        }
+            }
             .eraseToAnyPublisher()
     }
 }
