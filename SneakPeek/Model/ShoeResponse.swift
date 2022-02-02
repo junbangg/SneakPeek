@@ -5,14 +5,6 @@
 //  Created by Jun Bang on 2022/01/16.
 //  Copyright © 2022 Jun suk Bang. All rights reserved.
 //
-
-import Foundation
-
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
-
 import Foundation
 
 // MARK: - Welcome
