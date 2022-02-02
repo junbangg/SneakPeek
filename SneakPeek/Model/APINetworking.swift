@@ -40,7 +40,9 @@ extension APINetworking: APIRequest {
     ///     - shoeName: shoe name search : String
     /// - Returns: send(with: prepareForProductSearch())
     func requestShoe(shoeName: String) -> AnyPublisher<ShoeResponse, Error> {
-        let request = prepareForShoeSearch(shoeName: shoeName, itemLimit: 10)
+        guard let request = prepareForShoeSearch(shoeName: shoeName, itemLimit: 10) else {
+            return Fail(error: APIError.badRequest("URL Error")).eraseToAnyPublisher()
+        }
         
         return sendShoeSearchRequest(with: request)
     }
@@ -57,16 +59,18 @@ extension APINetworking: APIRequest {
     /// - Parameters:
     ///     - request: receives URLRequest prepared by  functions in extension
     /// - Returns: An array of JSON Objects
-    private func sendShoeSearchRequest<T> (with request: URLRequest) -> AnyPublisher<T, Error> where T: Decodable{
+    private func sendShoeSearchRequest<T> (with request: URLRequest) -> AnyPublisher<T, Error> where T: Decodable {
         return session.dataTaskPublisher(for: request)
-//            .mapError { error in
-//                .badRequest(error.localizedDescription)
-//            }
+            .mapError { _ in
+                APIError.badRequest("Error")
+            }
                         .map{$0.data}
+                        
                         .decode(type: T.self, decoder: JSONDecoder())
 //            .flatMap(maxPublishers: .max(1)) { response in
 //                decode(response.data)
 //            }
+                        
             .eraseToAnyPublisher()
     }
     
@@ -126,21 +130,16 @@ private extension APINetworking {
     /// - Parameters:
     ///     - shoeName: shoe name : String for search
     /// - Returns: URLRequest
-    func prepareForShoeSearch(shoeName: String, itemLimit: Int) -> URLRequest {
+    func prepareForShoeSearch(shoeName: String, itemLimit: Int) -> URLRequest? {
         let urlstring = API.fetchShoe.url + "?" + "limit=\(itemLimit)" + "&query=\(shoeName)"
-        let url = URL(string: urlstring)!
-//        let parameters: [String: Any] = ["limit": itemLimit, "query": shoeName]
-        let headers = ["x-rapidapi-key": API.APIKey.apiKey]
-        
+        guard let url = URL(string: urlstring) else {
+            return nil
+        }
         var request = URLRequest(url: url)
+        
+        let headers = ["x-rapidapi-key": API.APIKey.apiKey]
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
-        
-//        do {
-//            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-//        } catch let error {
-//            print(error.localizedDescription)
-//        }
         
         return request
     }

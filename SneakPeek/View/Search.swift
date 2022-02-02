@@ -19,8 +19,7 @@ import SwiftKeychainWrapper
 struct Search: View {
     //MARK: - Properties
     
-    /// view model that will provide all required data for the view
-    @ObservedObject var viewModel : SearchViewModel
+    @ObservedObject var viewModel: SearchViewModel
     @State private var inputSwitch: Bool = false
     @State private var shoeID: String = ""
     
@@ -44,7 +43,6 @@ struct Search: View {
                         searchEmpty
                     } else {
                         searchField
-                        /// Search Results are presented here
                         List {
                             if viewModel.searchDatasource == nil {
                                 emptySection
@@ -64,10 +62,10 @@ struct Search: View {
     }
 }
 
-//MARK: - Extensions
+//MARK: - Helper Views
 
 private extension Search {
-    //MARK: - Custom Logo view
+    //MARK: - Custom Logo
     
     var logo: some View {
         Image("Chicago")
@@ -76,7 +74,8 @@ private extension Search {
             .frame(width: 300)
             .padding(.top,30)
     }
-    //MARK: - Search button view
+    
+    //MARK: - Search Button
     
     var searchButton: some View {
         Button(action: {
@@ -86,57 +85,58 @@ private extension Search {
                 Text("Jordan Chicago")
                 Spacer()
                 Spacer()
-            }            .padding()
-                .foregroundColor(.gray)
-                .background(MyColors.lightGreyColor)
-                .cornerRadius(5.0)
-                .padding(.bottom, 20)
-                .padding(40)
+            }
+            .padding()
+            .foregroundColor(.gray)
+            .background(MyColors.lightGreyColor)
+            .cornerRadius(5.0)
+            .padding(.bottom, 20)
+            .padding(20)
         }.buttonStyle(PlainButtonStyle())
     }
-    //MARK: - Search Field view
+    
+    //MARK: - Search Field
     
     var searchField: some View {
         TextField("Jordan Chicago", text: $viewModel.shoe)
             .padding()
             .background(MyColors.lightGreyColor)
             .cornerRadius(5.0)
-            .padding(.bottom, 20)
+//            .padding(.bottom, 20)
             .padding()
     }
-    //MARK: - results view
+    
+    //MARK: - Results
     
     var results: some View {
         Section {
             ForEach(viewModel.searchDatasource!.results) { shoe in
-                SearchResult.init(viewModel: shoe, shoeID: shoe.id)
-//                NavigationButton(action: {
-//                    let _: Bool = KeychainWrapper.standard.set(result.id, forKey: "shoeID")
-//                    //                    self.shoeID = result.id
-//                }, destination: {
-//                    Product(viewmodel: self.productViewModel)
-////                                        self.viewModel.ProductDetails
-//                }) {
-//
-//                    SearchResult.init(viewModel: shoe, shoeID: shoe.id)
-//                }
-                
+                NavigationButton(action: {
+                    let _: Bool = KeychainWrapper.standard.set(shoe.id, forKey: "shoeID")
+                    //                    self.shoeID = result.id
+                }, destination: {
+                    Product(viewmodel: self.viewModel)
+                }) {
+                    SearchResult.init(viewModel: shoe, shoeID: shoe.id)
+                }
             }
         }
     }
-    //MARK: - View for when search is empty
+    
+    //MARK: - Home Section(Empty Search)
     
     var searchEmpty: some View {
         Section {
-            Text("신발의 리셀 가격 한 눈에 확인하세요!")
+            Text("신발의 리셀 가격을 한 눈에 확인해보세요!")
                 .foregroundColor(.gray)
         }
     }
-    //MARK: - View for Empty section
+    
+    //MARK: - Search Empty Section
     
     var emptySection: some View {
         Section {
-            Text("검색 할 신발을 입력해주세요!")
+            Text("검색할 신발을 입력해주세요!")
                 .foregroundColor(.gray)
         }
     }

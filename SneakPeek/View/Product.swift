@@ -31,7 +31,7 @@ struct Product: View {
 //                        Text("Loading...")
 //                        Spinner(isAnimating: true, style: .large, color: .gray)
                         Loader()
-                    }else {
+                    } else {
                         Thumbnail(url: self.viewmodel.productDatasource!.thumbnail)
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 300)
@@ -52,8 +52,8 @@ struct Product: View {
                             self.chooseSize
                         }
                         .padding()
-                        self.links
-                        self.productDetails
+//                        self.links
+//                        self.productDetails
                     }
                     
                 }

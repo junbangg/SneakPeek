@@ -15,14 +15,13 @@ struct SearchResult: View {
     private let viewModel: Shoe
     private let shoeID: String
     
-    init(viewModel: Shoe, shoeID : String) {
+    init(viewModel: Shoe, shoeID: String) {
         self.viewModel = viewModel
         self.shoeID = viewModel.id
     }
     //MARK: - View body
     var body: some View {
             HStack {
-                //Thumbnail
                 Thumbnail(url: viewModel.image.thumbnail)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 80)
