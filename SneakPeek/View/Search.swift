@@ -110,10 +110,12 @@ private extension Search {
     
     var results: some View {
         Section {
-            ForEach(viewModel.searchDatasource!.results) { shoe in
+            let results = viewModel.searchDatasource!.results
+            ForEach(results) { shoe in
                 NavigationButton(action: {
-                    let _: Bool = KeychainWrapper.standard.set(shoe.id, forKey: "shoeID")
-                    //                    self.shoeID = result.id
+                    let shoeID = results.first!.id
+                    let _: Bool = KeychainWrapper.standard.set(shoeID, forKey: "shoeID")
+//                    print(shoeID)
                 }, destination: {
                     Product(viewmodel: self.viewModel)
                 }) {

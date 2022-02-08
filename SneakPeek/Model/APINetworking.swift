@@ -16,9 +16,8 @@ import Combine
 
 protocol APIRequest {
     //Get Products
-    func requestShoe(shoeName: String) -> AnyPublisher<ShoeResponse, Error>
-//    func requestShoeDetails(shoeID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError>
-    
+    func requestShoe(sneakerName: String) -> AnyPublisher<ShoeResponse, Error>
+    func requestShoeDetails(sneakerID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError>
 }
 
 // MARK: - Main Class
@@ -39,19 +38,21 @@ extension APINetworking: APIRequest {
     /// - Parameters:
     ///     - shoeName: shoe name search : String
     /// - Returns: send(with: prepareForProductSearch())
-    func requestShoe(shoeName: String) -> AnyPublisher<ShoeResponse, Error> {
-        guard let request = prepareForShoeSearch(shoeName: shoeName, itemLimit: 10) else {
+    func requestShoe(sneakerName: String) -> AnyPublisher<ShoeResponse, Error> {
+        guard let request = prepareForShoeSearch(sneakerName: sneakerName, itemLimit: 10) else {
             return Fail(error: APIError.badRequest("URL Error")).eraseToAnyPublisher()
         }
-        
         return sendShoeSearchRequest(with: request)
     }
     
     //MARK: -getProductPrices
     
-//    func requestShoeDetails(shoeID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError> {
-//        return sendShoeDetailsRequest(with: prepareForShoeDetailsSearch(shoeID: shoeID))
-//    }
+    func requestShoeDetails(sneakerID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError> {
+        guard let request = prepareForShoeDetailsSearch(sneakerID: sneakerID) else {
+            return Fail(error: APIError.badRequest("URL Error")).eraseToAnyPublisher()
+        }
+        return sendShoeDetailsRequest(with: request)
+    }
     
     //MARK: - send shoe request to API
     
@@ -101,6 +102,7 @@ private extension APINetworking {
         
         private enum Path {
             static let search = "search"
+            static let details = "sneakers"
         }
         
         enum APIKey {
@@ -108,11 +110,14 @@ private extension APINetworking {
         }
         
         case fetchShoe
+        case fetchShoeDetails
         
         var url: String {
             switch self {
             case .fetchShoe:
                 return URLString.baseURL + Path.search
+            case .fetchShoeDetails:
+                return URLString.baseURL + Path.details
             }
         }
     }
@@ -128,14 +133,28 @@ private extension APINetworking {
     /// - Parameters:
     ///     - shoeName: shoe name : String for search
     /// - Returns: URLRequest
-    func prepareForShoeSearch(shoeName: String, itemLimit: Int) -> URLRequest? {
-        let urlstring = API.fetchShoe.url + "?" + "limit=\(itemLimit)" + "&query=\(shoeName)"
-        guard let url = URL(string: urlstring) else {
+    private func prepareForShoeSearch(sneakerName: String, itemLimit: Int) -> URLRequest? {
+        let urlString = API.fetchShoe.url + "?" + "limit=\(itemLimit)" + "&query=\(sneakerName)"
+        guard let url = URL(string: urlString) else {
             return nil
         }
         var request = URLRequest(url: url)
         
         let headers = ["x-rapidapi-key": API.APIKey.apiKey]
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = headers
+        
+        return request
+    }
+    
+    private func prepareForShoeDetailsSearch(sneakerID: String) -> URLRequest? {
+        let urlString = API.fetchShoeDetails.url + "/" + sneakerID
+        guard let url = URL(string: urlString) else {
+            return nil
+        }
+        var request = URLRequest(url: url)
+        
+        let headers = ["x-rapid-api-key": API.APIKey.apiKey]
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
