@@ -63,11 +63,9 @@ struct Search: View {
     }
 }
 
-//MARK: - Extensions
+//MARK: - Helper Views
 
 private extension Search {
-    //MARK: - Custom Logo view
-    
     var logo: some View {
         Image("Chicago")
             .resizable()
@@ -75,7 +73,6 @@ private extension Search {
             .frame(width: 300)
             .padding(.top,30)
     }
-    //MARK: - Search button view
     
     var searchButton: some View {
         Button(action: {
@@ -93,7 +90,6 @@ private extension Search {
                 .padding(40)
         }.buttonStyle(PlainButtonStyle())
     }
-    //MARK: - Search Field view
     
     var searchField: some View {
         TextField("Jordan Chicago", text: $viewModel.shoe)
@@ -103,7 +99,6 @@ private extension Search {
             .padding(.bottom, 20)
             .padding()
     }
-    //MARK: - results view
     
     var results: some View {
         Section {
@@ -121,7 +116,6 @@ private extension Search {
             }
         }
     }
-    //MARK: - View for when search is empty
     
     var searchEmpty: some View {
         Section {
@@ -129,7 +123,6 @@ private extension Search {
                 .foregroundColor(.gray)
         }
     }
-    //MARK: - View for Empty section
     
     var emptySection: some View {
         Section {

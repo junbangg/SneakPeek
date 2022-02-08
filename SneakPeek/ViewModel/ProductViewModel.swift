@@ -9,16 +9,22 @@
 import Foundation
 import Combine
 
-class ProductViewModel: ObservableObject {
+final class ProductViewModel: ObservableObject {
+    // MARK: - Properties
+    
     @Published var datasource: ShoeDetailsDataModel?
     private let shoeID : String
     private let shoeFetcher: APINetworking
     private var disposables = Set<AnyCancellable>()
     
+    // MARK: - Initializer
+    
     init(shoeID: String, shoeFetcher: APINetworking) {
         self.shoeID = shoeID
         self.shoeFetcher = shoeFetcher
     }
+    
+    // MARK: - Internal Methods
     
     func refresh() {
         shoeFetcher.requestShoeDetails(shoeID: shoeID)

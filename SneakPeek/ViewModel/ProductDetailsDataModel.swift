@@ -31,6 +31,14 @@ struct ShoeDetailsDataModel {
         return details.thumbnail
     }
     
+    // MARK: - Initializer
+    
+    init(details: ShoeDetailsSearchResponse) {
+        self.details = details
+    }
+    
+    // MARK: - Internal Methods
+    
     func getSize(size: Float) -> [Double] {
         let convertedSize: String
         if size.rounded(.up) == size.rounded(.down) {
@@ -50,9 +58,4 @@ struct ShoeDetailsDataModel {
         
         return sizeList
     }
-    
-    init(details: ShoeDetailsSearchResponse) {
-        self.details = details
-    }
-    
 }

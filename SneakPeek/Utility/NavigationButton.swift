@@ -14,12 +14,16 @@ import SwiftUI
 
  */
 struct NavigationButton<Destination: View, Label: View>: View {
+    // MARK: - Properties
+    
     var action: () -> Void = { }
     var destination: () -> Destination
     var label: () -> Label
 
     @State private var isActive: Bool = false
 
+    // MARK: - View Body
+    
     var body: some View {
         Button(action: {
             self.action()
@@ -36,10 +40,15 @@ struct NavigationButton<Destination: View, Label: View>: View {
     }
 }
 
-// This view lets us avoid instantiating our Destination before it has been pushed.
-struct LazyDestination<Destination: View>: View {
-    var destination: () -> Destination
-    var body: some View {
-        self.destination()
+// MARK: - Nested Types
+
+extension NavigationButton {
+    // This view lets us avoid instantiating our Destination before it has been pushed.
+    private struct LazyDestination<Destination: View>: View {
+        var destination: () -> Destination
+        var body: some View {
+            self.destination()
+        }
     }
 }
+

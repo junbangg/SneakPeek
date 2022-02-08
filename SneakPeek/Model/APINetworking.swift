@@ -23,7 +23,7 @@ protocol APIRequest {
 
 // MARK: - Main Class
 
-class APINetworking {
+final class APINetworking {
     private let session: URLSession
     init(session: URLSession = .shared) {
         self.session = session
@@ -52,9 +52,11 @@ extension APINetworking: APIRequest {
     func requestShoeDetails(shoeID: String) -> AnyPublisher<ShoeDetailsSearchResponse, APIError> {
         return sendShoeDetailsRequest(with: prepareForShoeDetailsSearch(shoeID: shoeID))
     }
-    
-    //MARK: - send shoe request to API
-    
+}
+
+// MARK: - Private Methods
+
+extension APINetworking {
     ///
     /// - Parameters:
     ///     - request: receives URLRequest prepared by  functions in extension
@@ -71,9 +73,6 @@ extension APINetworking: APIRequest {
             //        }
             .eraseToAnyPublisher()
     }
-    
-    //MARK: - send shoe details request to API
-    
     ///
     /// - Parameters:
     ///     - request: receives URLRequest prepared by  functions in extension
@@ -89,25 +88,11 @@ extension APINetworking: APIRequest {
         }
             .eraseToAnyPublisher()
     }
-}
-
-// MARK: -URL components
-
-private extension APINetworking {
-    
-    //http://localhost:3000
-    struct BaseAPI {
-        static let baseURL: String = "http://localhost:4000/"
-        static let search: String = "search/"
-    }
-    
-    //MARK: -prepare shoe search
-    
     ///
     /// - Parameters:
     ///     - shoeName: shoe name : String for search
     /// - Returns: URLRequest
-    func prepareForShoeSearch(shoeName: String) -> URLRequest {
+    private func prepareForShoeSearch(shoeName: String) -> URLRequest {
         //TODO: Error handeling
         let urlstring = BaseAPI.baseURL + BaseAPI.search + shoeName
         
@@ -125,20 +110,27 @@ private extension APINetworking {
             return dataRequest
         }
     }
-    
-    //MARK: - prepare shoe details search
-    
     ///
     /// - Parameters:
     ///     - shoeID: id for shoe : String for search
     /// - Returns: URLRequest
     
     //GET localhost:3000/id/:styleID/prices
-    func prepareForShoeDetailsSearch(shoeID: String) -> URLRequest {
+    private func prepareForShoeDetailsSearch(shoeID: String) -> URLRequest {
         let url = URL(string: BaseAPI.baseURL + "id/" + shoeID + "/prices")!
         var dataRequest = URLRequest(url: url)
         dataRequest.httpMethod = "GET"
         
         return dataRequest
+    }
+}
+
+// MARK: -URL components
+
+extension APINetworking {
+    //http://localhost:3000
+    struct BaseAPI {
+        static let baseURL: String = "http://localhost:4000/"
+        static let search: String = "search/"
     }
 }

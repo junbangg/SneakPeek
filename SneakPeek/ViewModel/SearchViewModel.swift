@@ -22,8 +22,9 @@ import SwiftKeychainWrapper
  */
  
 /// ViewModel for Search View
-class SearchViewModel: ObservableObject {
+final class SearchViewModel: ObservableObject {
     //MARK: - Publishers and States
+    
     @Published var shoe: String = ""
     @State var inputSwitch: Bool = false
     /// Publisher that Search view will subscribe to in order to receive SearchResultData
@@ -34,7 +35,9 @@ class SearchViewModel: ObservableObject {
     private let shoeFetcher: APINetworking
     /// Trash can
     private var disposables = Set<AnyCancellable>()
-    //MARK: - init
+    
+    //MARK: - Initializer
+    
     init(
         shoeFetcher: APINetworking,
         scheduler: DispatchQueue = DispatchQueue(label: "SearchViewModel")
@@ -47,7 +50,9 @@ class SearchViewModel: ObservableObject {
             .sink(receiveValue: fetchShoe(forShoe:))
             .store(in: &disposables)
     }
-    //MARK: - fetchShoe()
+    
+    //MARK: - Internal Methods
+    
     /**
      Method for fetching a shoe product's data.
         1.  The function will make a request to the model with given parameter (shoe)
@@ -111,6 +116,9 @@ class SearchViewModel: ObservableObject {
             .store(in: &disposables)
     }
 }
+
+// MARK: - Helper Views
+
 /// Extension that will build a view with shoe data
 extension SearchViewModel {
     var ProductDetails: some View {

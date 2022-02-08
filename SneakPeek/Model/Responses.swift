@@ -28,7 +28,9 @@ struct ShoeSearchResponse: Codable {
         case urlKey, resellLinks
     }
 }
+
 // MARK: - PriceDataResponse
+
 struct ShoeDetailsSearchResponse: Codable {
     let lowestResellPrice: LowestResellPrice
     let resellPrices: ResellPrices
@@ -49,6 +51,7 @@ struct ShoeDetailsSearchResponse: Codable {
 }
 
 // MARK: - LowestResellPrice
+
 struct LowestResellPrice: Codable {
     let stockX : Int?
     let flightClub : Int?
@@ -57,6 +60,7 @@ struct LowestResellPrice: Codable {
 }
 
 // MARK: - ResellLinks
+
 struct ResellLinks: Codable {
     let stockX : String?
     let flightClub : String?
@@ -64,7 +68,9 @@ struct ResellLinks: Codable {
     let stadiumGoods : String?
     
 }
+
 // MARK: - ResellPrices
+
 struct ResellPrices: Codable {
     let goat, flightClub, stockX, stadiumGoods: [String: Double]
 }

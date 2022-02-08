@@ -12,13 +12,19 @@ import SwiftUI
  */
 struct SearchResult: View {
     //MARK: - Properties
+    
     private let viewModel : ShoeDataModel
     private let shoeID : String
+    
+    // MARK: - Initializer
+    
     init(viewModel: ShoeDataModel, shoeID : String) {
         self.viewModel = viewModel
         self.shoeID = viewModel.styleID
     }
+    
     //MARK: - View body
+    
     var body: some View {
             HStack {
                 //Thumbnail

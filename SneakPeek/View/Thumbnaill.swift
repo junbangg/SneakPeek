@@ -6,11 +6,38 @@ import SwiftUI
  - Reference : https://www.hackingwithswift.com/forums/swiftui/loading-images/3292
  */
 struct Thumbnail: View {
-    ///Enumeration to differentiate states of app
+    // MARK: - Properties
+    
+    @ObservedObject private var loader: Loader
+    var loading: Image
+    var failure: Image
+
+    // MARK: - View Body
+    
+    var body: some View {
+        selectImage()
+            .resizable()
+    }
+
+    // MARK: - Initializer
+    
+    init(url: String,
+         loading: Image = Image(systemName: "photo"),
+         failure: Image = Image(systemName: "multiply.circle")
+    ) {
+        _loader = ObservedObject(wrappedValue: Loader(url: url))
+        self.loading = loading
+        self.failure = failure
+    }
+}
+
+// MARK: - Nested Types
+
+extension Thumbnail {
     private enum LoadState {
         case loading, success, failure
     }
-    /// Loader
+    
     private class Loader: ObservableObject {
         var data = Data()
         var state = LoadState.loading
@@ -34,22 +61,11 @@ struct Thumbnail: View {
             }.resume()
         }
     }
+}
 
-    @ObservedObject private var loader: Loader
-    var loading: Image
-    var failure: Image
+// MARK: - Private Methods
 
-    var body: some View {
-        selectImage()
-            .resizable()
-    }
-
-    init(url: String, loading: Image = Image(systemName: "photo"), failure: Image = Image(systemName: "multiply.circle")) {
-        _loader = ObservedObject(wrappedValue: Loader(url: url))
-        self.loading = loading
-        self.failure = failure
-    }
-
+extension Thumbnail {
     private func selectImage() -> Image {
         switch loader.state {
         case .loading:
